@@ -1,0 +1,93 @@
+/*
+*  MENU HORIZONTAL DASHBOARD
+*-------------------------------------------------------*/
+#wrapperMenu .panel-title a .caret{
+    margin-top: 8px;
+    float: right;
+}
+
+#menu-dashboard {
+    /*border: 1px dashed red;*/
+    border-left: 1px solid #bcbcbc; 
+    border-right: 1px solid #bcbcbc;
+    border-top: 1px solid #bcbcbc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#menu-dashboard .panel-heading
+{
+	color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    border-bottom: 1px solid #bcbcbc;
+	padding:0px;
+}
+
+#menu-dashboard .panel-title
+{
+	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+	background:#f5f5f5;
+}
+
+#menu-dashboard .panel-title a
+{
+	    border-radius: 0;
+    padding: 10px;
+    color: #444;
+	    position: relative;
+    display: block;
+}
+
+#menu-dashboard .panel-title
+{
+	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+	background:#f5f5f5;
+}
+
+
+#menu-dashboard  .panel-title  a:hover
+{
+	background:#e84d1c;
+	color:#fff;
+	    transition: all 1ms ease-in-out;
+}
+
+#menu-dashboard .panel-collapse .list-group
+{
+	    background: #cecece;
+}
+
+#menu-dashboard .panel-collapse .list-group li
+{
+	      border-radius: 0;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #bcbcbc;
+}
+
+#menu-dashboard .panel-collapse .list-group li a
+{
+    border-radius: 0;
+    padding: 10px;
+    color: #444;
+	    margin: 0;
+    text-indent: 20px;
+	    position: relative;
+    display: block;
+	background-color: transparent;
+	text-decoration:none;
+}
+
+#menu-dashboard .panel-collapse .list-group li a:hover
+{
+background: rgba(0,0,0,.5);
+    color: #fff!important;
+	text-decoration:none;
+}

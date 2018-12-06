@@ -1,0 +1,1327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cuponera Docs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+<style>
+.requiredLabel{
+color:red;
+vertical-align: super;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="jumbotron">
+  <h2>Cuponera RyR <small><span class="badge">0.0.1</span></small></h2>
+</div>
+<!--USER-->
+<p><strong>/user</strong></p>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+         <strong><span class="label label-success">POST</span> users/signup</strong>
+        </a>&nbsp;&nbsp;<samp><small>Registra un nuevo usuario</small></samp>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos del usuario a crear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"nombre":"Juan Martin",<br>
+			"email":"juanmartin@hotmail.com"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos
+		<div class="well well-sm">
+		<code>Bad Request</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>201</strong></td>
+		<td>Generado Correctamente
+		<div class="well well-sm">
+		<code>
+		"user": {<br>
+		"idusuario":"1",<br>
+			"nombre":"Juan Martin",<br>
+			"email":"juanmartin@hotmail.com"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <strong><span class="label label-success">POST</span> users/signin</strong>
+        </a>&nbsp;&nbsp;<samp><small>Loguea un usuario</small></samp>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+         <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos del usuario a loguear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"email":"juanmartin@hotmail.com"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos o email no encontrado
+		<div class="well well-sm">
+		<code>{<br>
+"estado": 7,<br>
+"mensaje": "Ha ocurrido un error"<br>
+}</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>Logueado Correctamente
+		<div class="well well-sm">
+		<code>
+		"user": {<br>
+		"idusuario":"1",<br>
+			"nombre":"Juan Martin",<br>
+			"email":"juanmartin@hotmail.com"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+         <strong><span class="label label-success">POST</span> users/exists</strong>
+        </a> &nbsp;&nbsp;<samp><small>Comprueba si existe un usuario</small></samp>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos del usuario a verificar<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"email":"juanmartin@hotmail.com"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos o email no encontrado
+		<div class="well well-sm">
+		<code>{<br>
+"estado": 7,<br>
+"mensaje": "Ha ocurrido un error"<br>
+}</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>Usuario Existe
+		<div class="well well-sm">
+		<code>
+		"user": {<br>
+		"idusuario":"1",<br>
+			"nombre":"Juan Martin",<br>
+			"email":"juanmartin@hotmail.com"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+         <strong><span class="label label-primary">GET</span> users</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene datos de usuario</small></samp>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idusuario</strong> <small> (Opcional)</td>
+		<td><span>ID de usuario. Si no se provee este parámetro, se devuelve un listado de todos los usuarios. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		users/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"user": {<br>
+		"idusuario":"1",<br>
+			"nombre":"Juan Martin",<br>
+			"email":"juanmartin@hotmail.com"<br>
+		},<br>
+		{<br>
+		"idusuario":"2",<br>
+			"nombre":"Pedro Gomez",<br>
+			"email":"pgomez@hotmail.com"<br>
+		}<br>
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--EMPRESAS-->
+
+
+<p><strong>/empresas</strong></p>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading1">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+         <strong><span class="label label-success">POST</span> empresas/signup</strong>
+        </a>&nbsp;&nbsp;<samp><small>Registra una nueva empresa</small></samp>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+      <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos de la empresa a crear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"razonsocial":"Distribuidora Lopez",<br>
+			"email":"distlopez@hotmail.com",<br>
+			"direccion":"Av. San Martin 371, Resistencia, Chaco",<br>
+			"telefono":"(362) 44332211",<br>
+			"password":"azahar123"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos
+		<div class="well well-sm">
+		<code>Bad Request</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>201</strong></td>
+		<td>Generado Correctamente
+		<div class="well well-sm">
+		<code>
+		"empresa": {<br>
+		"idempresa":"1",<br>
+		"razonsocial":"Distribuidora Lopez",<br>
+			"email":"distlopez@hotmail.com",<br>
+			"direccion":"Av. San Martin 371, Resistencia, Chaco",<br>
+			"telefono":"(362) 44332211",<br>
+			"lat":"-27.4562948",<br>
+			"lon":"-58.9824705"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading2">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+          <strong><span class="label label-success">POST</span> empresas/signin</strong>
+        </a>&nbsp;&nbsp;<samp><small>Loguea una empresa</small></samp>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+         <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos de la empresa a loguear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"email":"juanmartin@hotmail.com",<br>
+			"password":"azahar123"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos,  email no encontrado o password incorrecto
+		<div class="well well-sm">
+		<code>{<br>
+"estado": 7,<br>
+"mensaje": "Ha ocurrido un error"<br>
+}</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>Logueado Correctamente
+		<div class="well well-sm">
+		<code>
+		"empresa": {<br>
+		"idempresa":"1",<br>
+		"razonsocial":"Distribuidora Lopez",<br>
+			"email":"distlopez@hotmail.com",<br>
+			"direccion":"Av. San Martin 371, Resistencia, Chaco",<br>
+			"telefono":"(362) 44332211"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading3">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+         <strong><span class="label label-success">POST</span> empresas/exists</strong>
+        </a> &nbsp;&nbsp;<samp><small>Comprueba si existe una empresa</small></samp>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+              <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos de la empresa a verificar<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"email":"distlopez@hotmail.com"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos o email no encontrado
+		<div class="well well-sm">
+		<code>{<br>
+"estado": 7,<br>
+"mensaje": "Ha ocurrido un error"<br>
+}</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>Usuario Existe
+		<div class="well well-sm">
+		<code>
+		"empresa": {<br>
+		"idempresa":"1",<br>
+		"razonsocial":"Distribuidora Lopez",<br>
+			"email":"distlopez@hotmail.com",<br>
+			"direccion":"Av. San Martin 371, Resistencia, Chaco",<br>
+			"telefono":"(362) 44332211"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading4">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+         <strong><span class="label label-success">POST</span> empresas/getFromLatLon</strong>
+        </a> &nbsp;&nbsp;<samp><small>Obtiene un listado de las empresas cercanas a una Latitud y Longitud</small></samp>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+              <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Valores de Latitud y Longitud deseados<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"lat":"-27.4562948",<br>
+			"lon":"-58.9824705"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos o email no encontrado
+		<div class="well well-sm">
+		<code>{<br>
+"estado": 7,<br>
+"mensaje": "Ha ocurrido un error"<br>
+}</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>Listado de empresas cercanas al punto solicitado
+		<div class="well well-sm">
+		<code>
+		"empresas": {<br>
+		"idempresa":"1",<br>
+		"razonsocial":"Distribuidora Lopez",<br>
+			"email":"distlopez@hotmail.com",<br>
+			"direccion":"Av. San Martin 371, Resistencia, Chaco",<br>
+			"telefono":"(362) 44332211",<br>
+			"lat": "-27.4562948",<br>
+"lon": "-58.9824705"<br>
+		},<br>
+		 {<br>
+		"idempresa":"2",<br>
+		"razonsocial": "Construir SA",<br>
+			"email": "construir@hotmail.com",<br>
+			"direccion": "Av Italia 102 Resistencia Chaco",<br>
+			"telefono":"(362) 44332211",<br>
+			"lat": "-27.4542147",<br>
+"lon": "-58.9811645"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="heading5">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+         <strong><span class="label label-primary">GET</span> empresas</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene datos de una empresa</small></samp>
+      </h4>
+    </div>
+    <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idempresa</strong> <small> (Opcional)</td>
+		<td><span>ID de empresa. Si no se provee este parámetro, se devuelve un listado de todas las empresas. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		empresas/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"empresas": {<br>
+		"idempresa":"1",<br>
+		"razonsocial":"Distribuidora Lopez",<br>
+			"email":"distlopez@hotmail.com",<br>
+			"direccion":"Av. San Martin 371, Resistencia, Chaco",<br>
+			"telefono":"(362) 44332211",<br>
+			"lat": "-27.4562948",<br>
+"lon": "-58.9824705"<br>
+		},<br>
+		 {<br>
+		"idempresa":"2",<br>
+		"razonsocial": "Construir SA",<br>
+			"email": "construir@hotmail.com",<br>
+			"direccion": "Av Italia 102 Resistencia Chaco",<br>
+			"telefono":"(362) 44332211",<br>
+			"lat": "-27.4542147",<br>
+"lon": "-58.9811645"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MARCAS-->
+
+
+<p><strong>/marcas</strong></p>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading6">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+         <strong><span class="label label-success">POST</span> marcas</strong>
+        </a>&nbsp;&nbsp;<samp><small>Registra una nueva marca</small></samp>
+      </h4>
+    </div>
+    <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+      <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos de la marca a crear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"nombre":"Coca-Cola",<br>
+			"descripcion":"Marca reconocida de bebidas sin alcohol.",<br>
+			"idempresa":"1"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos
+		<div class="well well-sm">
+		<code>Bad Request</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>201</strong></td>
+		<td>Generado Correctamente
+		<div class="well well-sm">
+		<code>
+		"marca": {<br>
+		"idmarca":"1",<br>
+		"nombre":"Distribuidora Lopez",<br>
+			"descripcion":"Marca reconocida de bebidas sin alcohol.",<br>
+			"idempresa":"1"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="heading7">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+         <strong><span class="label label-primary">GET</span> marcas/getMarcasPorEmpresa</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene un listado de las marcas que pertenecen a una empresa</small></samp>
+      </h4>
+    </div>
+    <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idempresa</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>ID de empresa. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		marcas/getMarcasPorEmpresa/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"marcas": {<br>
+		"idmarca":"1",<br>
+		"nombre":"Coca-Cola",<br>
+			"descripcion":"Reconocida marca de bebidas sin alcohol.",<br>
+			"idempresa":"1"<br>
+		},<br>
+{<br>
+		"idmarca":"2",<br>
+		"nombre":"Pringles",<br>
+			"descripcion":"Paps fritas de varios sabores.",<br>
+			"idempresa":"1"<br>
+		}<br>
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="heading8">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+         <strong><span class="label label-primary">GET</span> marcas/getMarcasPorID</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene detalles de una marca.</small></samp>
+      </h4>
+    </div>
+    <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idmarca</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>ID de empresa. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		marcas/getMarcasPorID/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"marcas": {<br>
+		"idmarca":"1",<br>
+		"nombre":"Coca-Cola",<br>
+			"descripcion":"Reconocida marca de bebidas sin alcohol.",<br>
+			"idempresa":"1"<br>
+		}<br>
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--CUPONES-->
+
+
+<p><strong>/cupones</strong></p>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading9">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+         <strong><span class="label label-success">POST</span> cupones/create</strong>
+        </a>&nbsp;&nbsp;<samp><small>Registra un nuevo cupón</small></samp>
+      </h4>
+    </div>
+    <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+      <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos del cupón a crear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"nombre":"Vaso de Coca-Cola Gratis",<br>
+			"descripcion":"Con tu compra de 1 hamburguesa te llevás un vaso mediano gratis.",<br>
+			"idmarca":"1",<br>
+			"finicio":"2017-08-01 10:00:00",<br>
+			"ffin":"2017-08-25 20:00:00"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos
+		<div class="well well-sm">
+		<code>Bad Request</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>201</strong></td>
+		<td>Generado Correctamente
+		<div class="well well-sm">
+		<code>
+		"cupones": {<br>
+		"idcupon":"1",<br>
+		"nombre":"Vaso de Coca-Cola Gratis",<br>
+			"descripcion":"Con tu compra de 1 hamburguesa te llevás un vaso mediano gratis.",<br>
+			"idmarca":"1",<br>
+			"finicio":"2017-08-01 10:00:00",<br>
+			"ffin":"2017-08-25 20:00:00"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading10">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+         <strong><span class="label label-success">POST</span> cupones/getCuponesPorMarcaUsuario</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene un listado de los cupones por marca para un usuario</small></samp>
+      </h4>
+    </div>
+    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>ID de marca e ID de usuario. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"idmarca":"1",<br>
+			"idusuario":"1"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"cupones": {<br>
+		"idcupon":"1",<br>
+		"nombre":"Vaso de Coca-Cola Gratis",<br>
+			"descripcion":"Con tu compra de 1 hamburguesa te llevás un vaso mediano gratis.",<br>
+			"idmarca":"1",<br>
+			"finicio":"2017-08-01 10:00:00",<br>
+			"ffin":"2017-08-25 20:00:00"<br>
+		},<br>
+		 {<br>
+		"idcupon":"2",<br>
+		"nombre":"50% OFF en la segunda hamburguesa",<br>
+			"descripcion":"Comprando un combo completo, te descontamos un 50% para otra hamburguesa.",<br>
+			"idmarca":"1",<br>
+			"finicio":"2017-08-01 10:00:00",<br>
+			"ffin":"2017-08-25 20:00:00"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="heading11">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+         <strong><span class="label label-primary">GET</span> cupones/getCuponesDisponibles</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene un listado de todos los cupones disponibles para un usuario.</small></samp>
+      </h4>
+    </div>
+    <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idusuario</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>ID de usuario. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		cupones/getCuponesDisponibles/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"cupones": {<br>
+		"idcupon":"1",<br>
+		"nombre":"Vaso de Coca-Cola Gratis",<br>
+			"descripcion":"Con tu compra de 1 hamburguesa te llevás un vaso mediano gratis.",<br>
+			"idmarca":"1",<br>
+			"finicio":"2017-08-01 10:00:00",<br>
+			"ffin":"2017-08-25 20:00:00"<br>
+		}<br>
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="heading12">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
+         <strong><span class="label label-primary">GET</span> cupones/getHistorialPorCliente</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene un listado de los cupones usados por un usuario.</small></samp>
+      </h4>
+    </div>
+    <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idusuario</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>ID de usuario. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		cupones/getHistorialPorCliente/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"cupones": {<br>
+		"idcupon": "1",<br>
+"idmarca": "1",<br>
+"nombre": "Descuento 10%",<br>
+"descripcion": "Usa este cupon para un descuento del 10% en todos nuestros productos",<br>
+"fpublicacion": "2017-08-09",<br>
+"finicio": "2017-08-09 06:00:00",<br>
+"ffin": "2017-08-15 15:00:00",<br>
+"fuso": "2017-08-09 05:57:43",<br>
+"estado": "1",<br>
+"marca": "Nisuta"<br>
+		}<br>
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!--CODIGOS-->
+
+
+<p><strong>/codigos</strong></p>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading13">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
+         <strong><span class="label label-success">POST</span> codigos/getCodigo</strong>
+        </a>&nbsp;&nbsp;<samp><small>Crea un código para un cupón</small></samp>
+      </h4>
+    </div>
+    <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+      <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos del código a crear<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"idcupon":"1",<br>
+			"idcliente":"1"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>Datos incompletos
+		<div class="well well-sm">
+		<code>Bad Request</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>Generado Correctamente
+		<div class="well well-sm">
+		<code>
+		"codigos": {<br>
+		"codigo":"18KgiQZf7db886",<br>
+		"idcupon":"1",<br>
+			"idcliente":"1"<br>
+		}</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		<span class="badge">To-Do: Controlar que no se pueda generar mas de un codigo por cupon por usuario</span>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading14">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
+         <strong><span class="label label-success">POST</span> cupones/validateCodigo</strong>
+        </a>&nbsp;&nbsp;<samp><small>Validar un codigo</small></samp>
+      </h4>
+    </div>
+    <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>body</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>Datos del código a validar.<br>
+		<div class="well well-sm">
+		<code>
+		{<br>
+			"codigo":"18KgiQZf7db886"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>400</strong></td>
+		<td>
+		<span>Código no valido.
+		<div class="well well-sm">
+		<code>{<br>
+		"estado": 3,<br>
+"mensaje": "Codigo No Valido"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"codigos": {<br>
+		"codigo": "18KgiQZf7db886",<br>
+"idcupon": "1",<br>
+"estado": "Validado"<br>
+		}
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		<span class="badge">To-Do: Controlar que no se pueda validar un codigo para el mismo par cupon/usuario (ver item anterior)</span>
+      </div>
+    </div>
+  </div>
+  
+    <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="heading15">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
+         <strong><span class="label label-primary">GET</span> codigos/getCodigosPorCupon</strong>
+        </a>&nbsp;&nbsp;<samp><small>Obtiene un listado de todos los codigos usados para un cupon.</small></samp>
+      </h4>
+    </div>
+    <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
+               <div class="panel-body">
+	 <h4>Parámetros</h4>
+        <table class="table">
+		<thead>
+		<th>Nombre</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>idcupon</strong> <small class="requiredLabel">* required</small></td>
+		<td><span>ID del cupon. Ejemplo:<br>
+		<div class="well well-sm">
+		<code>
+		codigos/getCodigosPorCupon/1
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		
+			 <h4>Respuestas</h4>
+        <table class="table">
+		<thead>
+		<th>Codigo</th><th>Descripcion</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td><strong>200</strong></td>
+		<td>
+		<div class="well well-sm">
+		<code>
+		"codigos": {<br>
+		"idcupon": "1",<br>
+"nombre": "Descuento 10%",<br>
+"descripcion": "Usa este cupon para un descuento del 10% en todos nuestros productos",<br>
+"marca": "Nisuta",<br>
+"idempresa": "1",<br>
+"email": "juanmartin@hotmail.com",<br>
+"usuario": "Juan Martin",<br>
+"idusuario": "1"<br>
+		}<br>
+		</code>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+  
+    
+  
+</div>
+</div>
+ <!-- jQuery -->
+    <script src="jquery.js"></script>
+  <script src="bootstrap.min.js"></script>
+  </body>
+
+</html>
