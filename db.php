@@ -5,7 +5,7 @@
 global $dbh;
  // connection to the database
  try {
- $dbh = new PDO('mysql:host=localhost;dbname=c1180366_agustin', 'localhost', '');
+ $dbh = new PDO('mysql:host=localhost;dbname=c1180366_agustin', 'root', '');
  //$dbh = new PDO('mysql:host=localhost;dbname=recticar', 'root', '');
  } catch(Exception $e) {
   exit("Error conectando al Servidor");
