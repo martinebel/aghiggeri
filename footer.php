@@ -1,5 +1,5 @@
   <!--   FOOTER START================== -->
-    
+
     <footer class="footer">
     <div class="container">
         <div class="row">
@@ -10,11 +10,11 @@
 			  <p><i class="fa fa-phone" aria-hidden="true"></i> 0362-155240760 (Whatsapp)</p>
 			  <p><i class="fa fa-envelope" aria-hidden="true"></i> ventas@agustinghiggeri.com.ar</p>
 			  </div>
-			  
+
 			   <div class="col-sm-4 col-xs-12">
-            
+
 			  </div>
-			  <div class="col-sm-12"> 
+			  <div class="col-sm-12">
             <ul class="social-icon">
             <!--<a href="#" class="social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
             <a href="#" class="social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -25,18 +25,18 @@
             <p>Los Precios No Incluyen Percepciones de Ingresos Brutos que puedieran corresponder de acuerdo a vs. Jurisdicción</p>
 			</ul>
             </div>
-       
-       
-       
+
+
+
         </div>
         <hr>
-        
+
         <div class="row text-center"> Desarrollado por Martin Ebel | ebel.martin@gmail.com</div>
         </div>
-        
-        
+
+
     </footer>
-    
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -44,12 +44,12 @@
   <script src="js/jquery-ui.min.js"></script>
   <script>
      $('.dropdown a').on('click', function(e){
-		   
+
 		   $('.submenu').each(function(i, obj) {
-			 
+
       $(obj).removeClass('in');
 });
-         
+
        });
   </script>
   <script type="text/javascript">
@@ -104,7 +104,7 @@
   <script>
 
   var uid="<?php echo $_SESSION['uid'];?>";
-  var cid="<?php echo $_SESSION['cid'];?>";
+  var cid="<?php echo (isset($_SESSION['cid'])?$_SESSION['cid']:"");?>";
   function addCart(id)
   {
 	  swal({
@@ -115,13 +115,12 @@
   closeOnConfirm: false,
   animation: "slide-from-top",
   cancelButtonText: "Cancelar",
-  inputPlaceholder: "1",
-  inputValue:"1"
+  inputPlaceholder: "1"
 },
 function(inputValue){
   if (inputValue === false) return false;
 
-  if (inputValue === "" || !$.isNumeric(inputValue)) {
+  if (inputValue === "" || !$.isNumeric(inputValue) || inputValue === "0") {
     swal.showInputError("Debe indicar la cantidad que desea comprar!");
     return false
   }
@@ -129,7 +128,7 @@ function(inputValue){
  $.ajax({
         type: "POST",
         url: "cartClass.php?action=addCart&clave="+uid+"&id="+id+"&cant="+inputValue+"&cid="+cid,
-        processData: false, 
+        processData: false,
         contentType: "application/json"
     })
     .done(function(datae, textStatus, jqXHR){
@@ -138,22 +137,22 @@ function(inputValue){
 	function(){
  location.reload();
 });
-		
+
     })
-    .fail(function(jqXHR, textStatus, errorThrown){     
+    .fail(function(jqXHR, textStatus, errorThrown){
 
     });
 });
-	  
-	  
-	
+
+
+
   }
-  
+
   function emptyCart()
   {
  swal({
-      title: "Vaciar Carrito", 
-      text: "Está seguro de querer eliminar todos los productos de su carrito?", 
+      title: "Vaciar Carrito",
+      text: "Está seguro de querer eliminar todos los productos de su carrito?",
       type: "warning",
       showCancelButton: true,
       closeOnConfirm: false,
@@ -164,43 +163,43 @@ function(inputValue){
       $.ajax({
         type: "POST",
         url: "cartClass.php?action=emptyCart&clave="+uid,
-        processData: false, 
+        processData: false,
         contentType: "application/json"
     })
     .done(function(datae, textStatus, jqXHR){
 	swal({title:"Vaciar Carrito", text:"Su carrito ha sido vaciado. Puede seguir comprando!", type:"success"},
 	function(){
-		
+
 location.reload();
 });
-		
+
     })
-    .fail(function(jqXHR, textStatus, errorThrown){     
+    .fail(function(jqXHR, textStatus, errorThrown){
 
     });
-     
+
     });
-  } 
-  
-  
+  }
+
+
   function removeCart(id)
   {
 	   $.ajax({
         type: "POST",
         url: "cartClass.php?action=removeCart&clave="+uid+"&id="+id,
-        processData: false, 
+        processData: false,
         contentType: "application/json"
     })
     .done(function(datae, textStatus, jqXHR){
 	 var obj = JSON.parse( datae );
 	swal({title:"Producto Eliminado!", text:"Se elimino el producto "+obj[0].nombre+" de su pedido.", type:"success"},
 	function(){
-		
+
 location.reload();
 });
-		
+
     })
-    .fail(function(jqXHR, textStatus, errorThrown){     
+    .fail(function(jqXHR, textStatus, errorThrown){
 
     });
   }
@@ -211,13 +210,13 @@ location.reload();
      $.ajax({
         type: "POST",
         url: "cartClass.php?action=emptyCart&clave="+id,
-        processData: false, 
+        processData: false,
         contentType: "application/json"
     })
     .done(function(datae, textStatus, jqXHR){
 location.reload();
     })
-    .fail(function(jqXHR, textStatus, errorThrown){     
+    .fail(function(jqXHR, textStatus, errorThrown){
 
     });
   }
@@ -227,17 +226,17 @@ location.reload();
      $.ajax({
         type: "POST",
         url: "cartClass.php?action=reloadCart&clave="+id+"&uid="+uid,
-        processData: false, 
+        processData: false,
         contentType: "application/json"
     })
     .done(function(datae, textStatus, jqXHR){
 window.location.href="cart.php";
     })
-    .fail(function(jqXHR, textStatus, errorThrown){     
+    .fail(function(jqXHR, textStatus, errorThrown){
 
     });
   }
-  
+
   //autocomplete search
   (function($){
   $( "#keyword" ).autocomplete({
@@ -247,9 +246,9 @@ window.location.href="cart.php";
 		window.location.href="detalle.php?id="+ui.item.id;
       }
   });
-  
+
    $( "#keyword" ).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-    
+
     var $li = $('<li>'),
         $img = $('<img  onerror="this.src=\'default.jpeg\';">');
 
@@ -262,42 +261,42 @@ window.location.href="cart.php";
 
     $li.attr('data-value', item.label);
     $li.append('<a href="#">');
-    $li.find('a').append($img).append(item.label);    
+    $li.find('a').append($img).append(item.label);
 
     return $li.appendTo(ul);
   };
-  
+
 
 })(jQuery);
 
 
   </script>
-  
+
    <script>
 
     $('#autofilter').on('change',function() {
-			
+
 $( "#modelofilter" ).empty();
        $.ajax({
         type: "GET",
         url: "ajax_search.php?action=autofilter&clave="+$("#autofilter").val(),
-        processData: false, 
+        processData: false,
         contentType: "application/json"
     })
     .done(function(datae, textStatus, jqXHR){
 	 var obj = JSON.parse( datae );
-	 
+
 	for(var i=0;i<obj.length;i++)
 	{
 		$("#modelofilter").append('<option value="'+obj[i].modelo+'">'+obj[i].modelo+'</option>');
 	}
-		
+
     })
-    .fail(function(jqXHR, textStatus, errorThrown){     
+    .fail(function(jqXHR, textStatus, errorThrown){
 
     });
     });
-	
+
 
   </script>
 
