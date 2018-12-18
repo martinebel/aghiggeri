@@ -1,6 +1,6 @@
   <?php
   include 'header.php';
- 
+
   ?>
     <style>
 	.table>tbody>tr>td, .table>tfoot>tr>td{
@@ -15,14 +15,14 @@
 		width:36%;
 		margin:1.5em 0;
 	}
-	
+
 	.actions .btn-info{
 		float:left;
 	}
 	.actions .btn-danger{
 		float:right;
 	}
-	
+
 	table#cart thead { display: none; }
 	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
 	table#cart tbody tr td:first-child { background: #333; color: #fff; }
@@ -30,16 +30,16 @@
 		content: attr(data-th); font-weight: bold;
 		display: inline-block; width: 8rem;
 	}
-	
-	
-	
+
+
+
 	table#cart tfoot td{display:block; }
 	table#cart tfoot td .btn{display:block;}
 	}
 
 p.no-margin{margin:14px 0 14px;;vertical-align:middle;}
 
-body { 
+body {
 
   font-family: arial, sans-serif;
   line-height: 100%;
@@ -58,10 +58,10 @@ body {
       display: inline-block;
       color: #999;
       line-height: 40px;
-      padding-left: 60px; 
-} 
+      padding-left: 60px;
+}
       .steps li:last-child { padding-right: 0; }
-      
+
       .normal:before {
         left: 0;
         top: 0;
@@ -76,7 +76,7 @@ body {
         display: inline-block;
         border: 3px solid #e5e5e5;
          border-radius:100%;
-        
+
       }
 .is-active:before,.is-current:before {left: 0;
         top: 0;
@@ -91,8 +91,8 @@ body {
         display: inline-block;
         border: 3px solid #e5e5e5;
          border-radius:100%; border-color: #69a53a; }
- .is-active  span:before { display: block; } 
-      
+ .is-active  span:before { display: block; }
+
       span:before {
           font-family: FontAwesome;
           font-style: normal;
@@ -100,7 +100,7 @@ body {
           line-height: 1;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          
+
           color: #fff;
           padding: 0;
           left: -10px;
@@ -114,7 +114,7 @@ body {
              width: 16px;
     height: 16px;
     border: 3px solid #69a53a;
-          
+
           border-radius:100%;
         }
 </style>
@@ -145,7 +145,7 @@ body {
 		inner join temp_pedidos on temp_pedidos.id=temp_pedidos_header.idpedido
 		inner join productos on productos.id=temp_pedidos.idproducto where temp_pedidos_header.clave='".$_SESSION['uid']."'");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		$total=0;
 		if($stmt->rowCount()==0){echo '<tr><td>No hay productos en su carrito!</p></td></tr>';}
 		foreach($result as $row)
@@ -178,11 +178,11 @@ body {
 			{
 				echo '<img src="default.jpeg"  class="img-responsive" style="width:50px;" />';
 			}
-									
+
 
 									echo '</div>
 									<div class="col-sm-10">
-										<p class="no-margin">'.$row['nombre'].'</p>
+										<p class="no-margin">('.$row['codigo'].') '.$row['nombre'].' '.$row['marca'].'</p>
 										<input type="hidden" name="codigo[]" value="'.$row['itemno'].'">
 									</div>
 								</div>
@@ -190,9 +190,9 @@ body {
 							<td data-th="Cant"><input name="cant[]" type="number" value="'.$row['cant'].'" min="1" max="100" /></td>
 							<td data-th="PU">$'.number_format($preciofinal,2,',','.').'</td>
 							<td data-th="SubTotal">$'.number_format($preciofinal*$row['cant'],2,',','.').'</td>
-							
+
 							<td class="actions" data-th="">
-								<button class="btn btn-danger btn-sm" onclick="removeCart('.$row['itemno'].');"><i class="fa fa-trash-o"></i></button>								
+								<button class="btn btn-danger btn-sm" onclick="removeCart('.$row['itemno'].');"><i class="fa fa-trash-o"></i></button>
 							</td>
 						</tr>
 					';
@@ -200,11 +200,11 @@ body {
 		}
 		?>
 		<input type="hidden" name="action" value="refreshCart">
-				</form>		
+				</form>
 					</tbody><tfoot>
 						<tr class="visible-xs">
 							<td class="text-center"><strong>Total $<?php echo number_format($total,2,',','.');?></strong></td>
-							
+
 						</tr>
 						<tr>
 							<td><button onclick="window.history.back()" class="btn btn-warning"><i class="fa fa-angle-left"></i> Seguir Comprando</button>&nbsp;
@@ -213,15 +213,15 @@ body {
 							</td>
 							<td  colspan="2"><small>Subtotal Neto IVA Incluido</small></td>
 							<td class="hidden-xs"><strong>Total $<?php echo number_format($total,2,',','.');?></strong></td>
-							<?php 
+							<?php
 							if($stmt->rowCount()>0){echo '<td><a href="checkout-step1.php" class="btn btn-success btn-block">Confirmar Pedido <i class="fa fa-angle-right"></i></a></td>';}?>
 						</tr>
 					</tfoot>
 				</table>
-					
-					
+
+
 				</div>
-			
+
       <?php
   include 'footer.php';
   ?>
