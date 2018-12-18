@@ -2,28 +2,28 @@
   include 'header.php';
   if(!isset($_SESSION['cid'])){echo '<script>window.location.href="index.php";</script>';exit();}
 
-  
-  
-  $stmt=$dbh->prepare("insert into pedidos (id,cliente,fecha,estado,observaciones) values (NULL,'".$_SESSION['cid']."','".date('Y-m-d')."','RECIBIDO','".$_POST['observaciones']."');");
+
+
+  $stmt=$dbh->prepare("insert into pedidos (id,cliente,fecha,estado,observaciones) values (NULL,'".$_SESSION['cid']."','".date('Y-m-d H:i:s')."','RECIBIDO','".$_POST['observaciones']."');");
 	 $stmt->execute();
-	 $ultimo=$dbh->lastInsertId(); 
-	 
+	 $ultimo=$dbh->lastInsertId();
+
  $stmt = $dbh->prepare("select productos.*,temp_pedidos.itemno,temp_pedidos.cant from temp_pedidos_header
     inner join temp_pedidos on temp_pedidos.id=temp_pedidos_header.idpedido
     inner join productos on productos.id=temp_pedidos.idproducto where temp_pedidos_header.clave='".$_SESSION['uid']."'");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		$total=0;
 		foreach($result as $row)
 		{
 			$stmt=$dbh->prepare("insert into detallepedidos(idpedido,idproducto,cant,precio) values (".$ultimo.",".$row['id'].",".$row['cant'].",'".$funciones->getPrecioCant($row['id'],$_SESSION['tipousuario'],$row['cant'])."');");
 			$stmt->execute();
 		}
-		
+
 		//borrar temporal y finalizar sesion
    $stmt=$dbh->prepare("select * from temp_pedidos_header where clave='".$_SESSION['uid']."'");
    $stmt->execute();
-   $result2 = $stmt->fetchAll(); 
+   $result2 = $stmt->fetchAll();
     foreach($result2 as $row2)
     {
       $idpedido=$row2["idpedido"];
@@ -33,7 +33,7 @@
         $stmt->execute();
         $stmt = $dbh->prepare("delete from temp_pedidos_header where idpedido='".$idpedido."'");
         $stmt->execute();
-        $_SESSION = array();
+      //  $_SESSION = array();
  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
@@ -45,7 +45,7 @@
   ?>
     <style>
 
-body { 
+body {
 
   font-family: arial, sans-serif;
   line-height: 100%;
@@ -64,10 +64,10 @@ body {
       display: inline-block;
       color: #999;
       line-height: 40px;
-      padding-left: 60px; 
-} 
+      padding-left: 60px;
+}
       .steps li:last-child { padding-right: 0; }
-      
+
       .normal:before {
         left: 0;
         top: 0;
@@ -82,7 +82,7 @@ body {
         display: inline-block;
         border: 3px solid #e5e5e5;
          border-radius:100%;
-        
+
       }
 .is-active:before,.is-current:before {left: 0;
         top: 0;
@@ -97,8 +97,8 @@ body {
         display: inline-block;
         border: 3px solid #e5e5e5;
          border-radius:100%; border-color: #69a53a; }
- .is-active  span:before { display: block; } 
-      
+ .is-active  span:before { display: block; }
+
       span:before {
           font-family: FontAwesome;
           font-style: normal;
@@ -106,7 +106,7 @@ body {
           line-height: 1;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          
+
           color: #fff;
           padding: 0;
          left: 0px;
@@ -120,7 +120,7 @@ body {
     width: 40px;
     height: 40px;
     border: 3px solid #69a53a;
-          
+
           border-radius:100%;
         }
 </style>
@@ -145,15 +145,15 @@ body {
 
 
 </div>
-	
-							
-							
-							
-						
-					
-					
+
+
+
+
+
+
+
 				</div>
-			
+
       <?php
   include 'footer.php';
   ?>
