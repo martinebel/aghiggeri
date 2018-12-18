@@ -160,11 +160,11 @@ $stmt=$dbh->prepare("update temp_pedidos_header set total='".$funciones->getTota
       {
         echo '<img src="default.jpeg"  class="img-responsive" />';
       }
-
+//<div class="close-icon"> <a href="#" onclick="removeCart('.$row['itemno'].');"><i class="fa fa-close"></i></a> </div>
                      echo '</a>
                     <div class="product-details">
-                      <div class="close-icon"> <a href="#" onclick="removeCart('.$row['itemno'].');"><i class="fa fa-close"></i></a> </div>
-                      <p class="product-name"> <a href="detalle.php?id='.$row['id'].'">'.$row['cant'].' x '.$row['nombre'].'</a> </p>  <span class="price text-primary">$'.number_format($funciones->getPrecioCant($row['id'],$_SESSION['tipousuario'],$row['cant'])*$row['cant'],2).'</span> </div>
+
+                      <p class="product-name"> <a href="detalle.php?id='.$row['id'].'">'.$row['cant'].' x ('.$row['codigo'].') '.$row['nombre'].' '.$row['marca'].'</a> </p>  <span class="price text-primary">$'.number_format($funciones->getPrecioCant($row['id'],$_SESSION['tipousuario'],$row['cant'])*$row['cant'],2).'</span> </div>
 
                   </li>';
 		}
