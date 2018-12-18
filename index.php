@@ -2,57 +2,231 @@
   <?php
   include 'header.php';
   ?>
-    
-    
-    
-    
+
+
+
+
   <div class="container" style="    padding-top: 10px; width:100%;margin-left:0px;margin-right:0px;">
  <div class="col-md-12" style="padding: 0px;">
     <div class="row">
 	<!------------------------>
 	<div class="hidden-xs col-md-3">
-	 <div id="wrapperMenu">	            
+
+    <div class="well" style="padding: 8px 0;">
+
+ <div style=" overflow-x: hidden;">
+     <ul class="nav nav-list">
+<li><label class="tree-toggler nav-header">Filtros</label>
+<ul class="nav nav-list tree">
+<form method="get" action="?" style="padding: 3px 15px;">
+<li>
+<select id="marcaauto" class="form-control" name="marcaauto">
+<?php
+$filtro1="";$filtro2="";$filtro3="";
+if(isset($_REQUEST['marcaauto']))
+{
+
+if($_REQUEST['marcaauto']!=$_SESSION['marcaauto'])
+{
+  $_SESSION['marcaauto']="0";
+  $_SESSION['modeloauto']="0";
+}
+$_SESSION['marcaauto']=$_REQUEST['marcaauto'];
+}
+
+  if(isset($_REQUEST['modeloauto']) )
+  {
+    $_SESSION['modeloauto']=$_REQUEST['modeloauto'];
+  }
+
+  if(isset($_REQUEST['marca']) )
+  {
+    $_SESSION['marca']=$_REQUEST['marca'];
+  }
+
+/********************/
+if(isset($_SESSION['marcaauto']) && $_SESSION['marcaauto']!="0")
+{
+$filtro1=" and marcaauto='".$_SESSION['marcaauto']."' ";
+}
+else {
+  $_SESSION['marcaauto']="0";
+  $_SESSION['modeloauto']="0";
+
+}
+
+  if(isset($_SESSION['modeloauto']) && $_SESSION['modeloauto']!="0")
+  {
+    $filtro2=" and modeloauto='".$_SESSION['modeloauto']."' ";
+  }
+
+  if(isset($_SESSION['marca']) && $_SESSION['marca']!="0")
+  {
+    $filtro3=" and marca='".$_SESSION['marca']."' ";
+  }
+
+if(isset($_SESSION['marcaauto']))
+{
+echo '<option value="0">Todas las Marcas de Vehiculo</option>';
+}
+else{
+ echo '<option value="0" selected>Todas las Marcas de Vehiculo</option>';
+}
+
+
+$stmt = $dbh->prepare("SELECT productos.marcaauto from categoriaproductos inner join productos on productos.id=categoriaproductos.idproducto  group by marcaauto");
+$stmt->execute();
+$result = $stmt->fetchAll();
+foreach($result as $row)
+{
+if(isset($_SESSION['marcaauto']))
+{
+if($_SESSION['marcaauto']==$row['marcaauto'])
+{
+echo '<option value="'.$row['marcaauto'].'" selected>'.$row['marcaauto'].'</option>';
+}
+else
+{
+echo '<option value="'.$row['marcaauto'].'">'.$row['marcaauto'].'</option>';
+}
+}
+else
+{
+echo '<option value="'.$row['marcaauto'].'">'.$row['marcaauto'].'</option>';
+}
+}
+echo '</select></li>';
+//modeloauto
+if(isset($_SESSION['marcaauto']) && $_SESSION['marcaauto']!="0")
+{
+echo ' <li>
+<select id="modeloauto" class="form-control" name="modeloauto">';
+if(isset($_SESSION['modeloauto']))
+{
+echo '<option value="0">Todos los Modelos</option>';
+}
+else{
+ echo '<option value="0" selected>Todos los Modelos</option>';
+}
+$stmt = $dbh->prepare("SELECT productos.modeloauto from categoriaproductos inner join productos on productos.id=categoriaproductos.idproducto where marcaauto='".$_SESSION['marcaauto']."' group by modeloauto");
+$stmt->execute();
+$result = $stmt->fetchAll();
+foreach($result as $row)
+{
+if(isset($_SESSION['modeloauto']))
+{
+if($_SESSION['modeloauto']==$row['modeloauto'])
+{
+echo '<option value="'.$row['modeloauto'].'" selected>'.$row['modeloauto'].'</option>';
+}
+else
+{
+echo '<option value="'.$row['modeloauto'].'">'.$row['modeloauto'].'</option>';
+}
+}
+else
+{
+echo '<option value="'.$row['modeloauto'].'">'.$row['modeloauto'].'</option>';
+}
+}
+echo '</select></li>';
+}
+
+
+//marca repuesto
+echo '<li>
+<select id="marca" class="form-control" name="marca">';
+
+if(isset($_SESSION['marca']))
+{
+echo '<option value="0">Todas las Marcas</option>';
+}
+else{
+ echo '<option value="0" selected>Todas las Marcas</option>';
+}
+
+
+$stmt = $dbh->prepare("SELECT productos.marca from categoriaproductos inner join productos on productos.id=categoriaproductos.idproducto  group by marca");
+$stmt->execute();
+$result = $stmt->fetchAll();
+foreach($result as $row)
+{
+if(isset($_SESSION['marca']))
+{
+if($_SESSION['marca']==$row['marca'])
+{
+echo '<option value="'.$row['marca'].'" selected>'.$row['marca'].'</option>';
+}
+else
+{
+echo '<option value="'.$row['marca'].'">'.$row['marca'].'</option>';
+}
+}
+else
+{
+echo '<option value="'.$row['marca'].'">'.$row['marca'].'</option>';
+}
+}
+echo '</select></li>';
+?>
+</form>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+	 <div id="wrapperMenu">
 	       <div class="panel-group" id="menu-dashboard">
   <div class="panel panel-default">
   <?php
 				  //traer categorias del mismo nivel que esta
-				  
-		
+
+
 		$stmt = $dbh->prepare("select * from categorias where padre=0");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
-		echo '<div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#menu-dashboard" href="#collapse'.$row['id'].'">
-       <span class="icon-link2"></span>
-                        '.$row['nombre'].'<span class="caret"></span></a>
-      </h4>
-    </div>
-	<div id="collapse'.$row['id'].'" class="panel-collapse collapse"> <ul class="list-group">                  
-                       ';
-                             $stmt2 = $dbh->prepare("select * from categorias where padre=".$row['id']);
+  $stmt2 = $dbh->prepare("select categorias.* from categoriaproductos inner join categorias on categorias.id=categoriaproductos.idcategoria inner join productos on productos.id=categoriaproductos.idproducto where padre=".$row['id'].$filtro1.$filtro2.$filtro3." group by categorias.id,categorias.nombre,categorias.padre");
         $stmt2->execute();
-		$result2 = $stmt2->fetchAll(); 
+		$result2 = $stmt2->fetchAll();
+    if($stmt2->rowCount()>0)
+    {
+      echo '<div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#menu-dashboard" href="#collapse'.$row['id'].'">
+         <span class="icon-link2"></span>
+                          '.$row['nombre'].'<span class="caret"></span></a>
+        </h4>
+      </div>
+    <div id="collapse'.$row['id'].'" class="panel-collapse collapse"> <ul class="list-group">
+                         ';
 		foreach($result2 as $row2)
 		{
 			echo ' <li><a href="productlist.php?id='.$row2['id'].'">'.strtoupper($row2['nombre']).'</a></li>';
-		
-		}     
+
+		}
                     echo '</ul>
   </div>';
+}
 		}
 		?>
 		</div>
 	 </div>
 	</div>
   </div>
-	
+
 <!------------------------>
-	
-	
- <div class="col-md-9" style="padding: 0px;">	
+
+
+ <div class="col-md-9" style="padding: 0px;">
+<?php
+if( !isset($_SESSION['cid']) ){
+   echo '<div class="col-md-12">
+     <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i>  Para ver precios y hacer pedidos, por favor <a href="login.php">inicie su sesion</a> o <a href="register.php">registrese si no tiene una cuenta</a></div>
+   </div>';
+ }
+   ?>
 	<div class="col-md-12 hidden-xs" style="text-align:center">
 	<?php
 	if ($handle = opendir('./img/m')) {
@@ -69,19 +243,19 @@
 }
 	?>
 	</div>
-	
+
 	<?php
 	$contador=0;
 	$stmt = $dbh->prepare("SELECT productos.* from paginicio inner join productos on productos.id=paginicio.idprod");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
 			echo ' <div class="col-md-4">
             <div class="product-item">
               <div class="pi-img-wrapper">';
 
-               
+
                 if(!empty($row["imagen"]))
 			{
 				$path_parts = pathinfo('./img/p/'.$row['imagen']);
@@ -117,7 +291,7 @@
 							echo '<br><small>GANE '.$row["descuento"]."% EXTRA!! Comprando ".$row["cantoferta"]." unidades</small><br>";
 						}
 			  echo '</h3>';
-			 
+
               if($funciones->esOferta($row['id']))
 					{
 						echo '<div class="sticker sticker-offer"></div>';
@@ -129,17 +303,17 @@
 					}
                echo '<a href="#" onclick="addCart('.$row['id'].');" class="btn add2cart">Comprar</a>';
            }
-			  } 
+			  }
 			   if($funciones->esNuevo($row['id']))
 			   {
 				   echo '<div class="sticker sticker-new"></div>';
 			   }
-              
+
            echo ' </div>
         </div>';
 			$contador++;
 			if($contador==4)
-				
+
 				{
 					if (file_exists("img/banner.jpg")) {
 					echo '<div class="col-md-12">
@@ -157,19 +331,36 @@
 					}
 		}
 	?>
-       
-		
-		
-	 </div>	
-	
+
+
+
+	 </div>
+
     </div>
 	</div>
-</div>  
-    
-    
-    
-    
-    
+</div>
+
+
+
+
+
   <?php
   include 'footer.php';
   ?>
+  <script>
+  jQuery(function() {
+    jQuery('#marcaauto').change(function() {
+
+  $( "#modeloauto" ).remove();
+        this.form.submit();
+    });
+
+    jQuery('#modeloauto').change(function() {
+        this.form.submit();
+    });
+
+        jQuery('#marca').change(function() {
+        this.form.submit();
+    });
+  });
+  </script>
