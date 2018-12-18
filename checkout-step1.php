@@ -3,7 +3,7 @@
   ?>
     <style>
 
-body { 
+body {
 
   font-family: arial, sans-serif;
   line-height: 100%;
@@ -22,10 +22,10 @@ body {
       display: inline-block;
       color: #999;
       line-height: 40px;
-      padding-left: 60px; 
-} 
+      padding-left: 60px;
+}
       .steps li:last-child { padding-right: 0; }
-      
+
       .normal:before {
         left: 0;
         top: 0;
@@ -40,7 +40,7 @@ body {
         display: inline-block;
         border: 3px solid #e5e5e5;
          border-radius:100%;
-        
+
       }
 .is-active:before,.is-current:before {left: 0;
         top: 0;
@@ -55,8 +55,8 @@ body {
         display: inline-block;
         border: 3px solid #e5e5e5;
          border-radius:100%; border-color: #69a53a; }
- .is-active  span:before { display: block; } 
-      
+ .is-active  span:before { display: block; }
+
       span:before {
           font-family: FontAwesome;
           font-style: normal;
@@ -64,7 +64,7 @@ body {
           line-height: 1;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          
+
           color: #fff;
           padding: 0;
          left: 0px;
@@ -78,7 +78,7 @@ body {
     width: 40px;
     height: 40px;
     border: 3px solid #69a53a;
-          
+
           border-radius:100%;
         }
 </style>
@@ -95,8 +95,8 @@ body {
 <?php
 							$stmt = $dbh->prepare( "SELECT * from clientes where idcliente=".$_SESSION['cid']."");
  $stmt->execute();
-		$result = $stmt->fetchAll(); 
-			
+		$result = $stmt->fetchAll();
+
 foreach($result as $row)
 		{
 			$nombre=$row['razonsocial'];
@@ -117,11 +117,13 @@ foreach($result as $row)
   <p>Si lo desea, puede agregar observaciones a su pedido</p>
   <p><input type="text" class="form-control" name="observaciones" placeholder="Observaciones"></p>
   <button type="submit" class="btn btn-success">Continuar <i class="fa fa-angle-right"></i></button>
+<br>
+<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i>  Esta accion solo genera un pedido de venta y no es necesario gestionar el pago del mismo. Este sitio web no maneja medios de pago ni metodos de envio.</div>
   </form>
   </div>
   </div>
   </div>';
-		
+
 							?>
 </div>
 
@@ -235,15 +237,15 @@ if(isset($_REQUEST['e']))
 </div></div></div></div>
 </form>
 </div>
-	
-							
-							
-							
-					
-					
-					
+
+
+
+
+
+
+
 				</div>
-			
+
       <?php
   include 'footer.php';
   ?>
