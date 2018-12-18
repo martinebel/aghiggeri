@@ -52,14 +52,6 @@
        $filtro3=" and marca='".$_SESSION['marca']."' ";
      }
 
-   if(isset($_SESSION['marcaauto']))
-   {
-   echo '<option value="0">Todas las Marcas de Vehiculo</option>';
-   }
-   else{
-    echo '<option value="0" selected>Todas las Marcas de Vehiculo</option>';
-   }
-
 
     if(isset($_REQUEST['p'])){$paginaactual=$_REQUEST['p'];}
 	$stmt = $dbh->prepare("SELECT productos.* from categoriaproductos inner join productos on productos.id=categoriaproductos.idproducto where idcategoria=".$_REQUEST['id'].$filtro1.$filtro2.$filtro3." order by marcaauto,modeloauto");
@@ -106,7 +98,13 @@
 <li>
 <select id="marcaauto" class="form-control" name="marcaauto">
 <?php
-
+if(isset($_SESSION['marcaauto']))
+{
+echo '<option value="0">Todas las Marcas de Vehiculo</option>';
+}
+else{
+ echo '<option value="0" selected>Todas las Marcas de Vehiculo</option>';
+}
 $stmt = $dbh->prepare("SELECT productos.marcaauto from categoriaproductos inner join productos on productos.id=categoriaproductos.idproducto  group by marcaauto");
 $stmt->execute();
 $result = $stmt->fetchAll();
