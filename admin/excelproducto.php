@@ -1,18 +1,18 @@
-<?php 
+<?php
 require '../db.php';
 $mensaje="";
 extract($_POST);
-
+set_time_limit(0);
 if ((isset($_POST['action']))&&($_POST['action'] == "upload")){
 //cargamos el archivo al servidor con el mismo nombre
-//solo le agregue el sufijo bak_ 
+//solo le agregue el sufijo bak_
 	$archivo = $_FILES['excel']['name'];
 	$tipo = $_FILES['excel']['type'];
 	$destino = "bak_".$archivo;
 	if (copy($_FILES['excel']['tmp_name'],$destino)) echo "";
 	else echo "Error Al Cargar el Archivo";
 ////////////////////////////////////////////////////////
-if (file_exists ("bak_".$archivo)){ 
+if (file_exists ("bak_".$archivo)){
 /** Clases necesarias */
 require_once('vendor/PHPExcel/Classes/PHPExcel.php');
 require_once('vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
@@ -22,11 +22,11 @@ require_once('vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
 //vaciar la tabla de productos y categorias-productos
 	/*$stmt = $dbh->prepare("delete from productos;truncate table productos;delete from categoriaproductos;");
         $stmt->execute();*/
-        
+
 // Cargando la hoja de cálculo
 $objReader = new PHPExcel_Reader_Excel2007();
 $objPHPExcel = $objReader->load("bak_".$archivo);
-$objFecha = new PHPExcel_Shared_Date();       
+$objFecha = new PHPExcel_Shared_Date();
 
 // Asignar hoja de excel activa
 $objPHPExcel->setActiveSheetIndex(0);
@@ -52,30 +52,30 @@ $stock = $objPHPExcel->getActiveSheet()->getCell(strtoupper($col_stock).$i)->get
 $sql="insert into productos values (NULL,'".$codigo."','".$nombre."','".$marca."','".$precio."','".$fechaalta."','".$descripcion."','".$marcaauto."','".$modeloauto."','".$imagen."','".$desclarga."','".$cantoferta."','".$descuento."','".$stock."');";
 $stmt = $dbh->prepare("$sql");
         $stmt->execute();
-		$idprod=$dbh->lastInsertId(); 
+		$idprod=$dbh->lastInsertId();
 //insertar en la categoria
  $stmt = $dbh->prepare("SELECT * from categorias where nombre='".$categoria."'");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
 			$idcat=$row['id'];
 		}
 	$stmt = $dbh->prepare("insert into categoriaproductos values (".$idprod.",".$idcat.")");
-        $stmt->execute();	
+        $stmt->execute();
 }
 $errores=0;
 echo '<div class="alert alert-success" role="alert">ARCHIVO IMPORTADO CON EXITO</div>';
 unlink($destino);
 include 'pages/excelproducto.tpl.php';
 }
-//si por algo no cargo el archivo bak_ 
+//si por algo no cargo el archivo bak_
 else{
 echo '<div class="alert alert-danger" role="alert">No se puede subir el archivo de Excel. Por favor, verifique los datos ingresados.</div>';
 include 'pages/excelproducto.tpl.php';
 }
 
-}	
+}
 else{
 include 'pages/excelproducto.tpl.php';
 }
