@@ -12,7 +12,7 @@
                     <h1 class="page-header">Importar Excel: Productos</h1>
                 </div>
             </div>
-           
+
              <div class="row">
                 <div class="col-lg-12">
 				 <div class="panel-body">
@@ -37,12 +37,12 @@
                 $qty .="GB";
                 break;
         }
-       
+
     }
 				  ?>
   <strong>Atencion!</strong> Esta acción no modifica los productos ya existentes, sino que INSERTA NUEVOS REGISTROS con la información contenida en el Excel. Prestar atención al contenido del Excel, ya que si por alguna razón hay datos duplicados esto no será controlado, dando como resultado productos duplicados o errores de inserción.<br>Tamaño maximo de archivo: <?php echo $qty;?>
 </div>
-				 <form name="importa" method="post" action="excelproducto.php" enctype="multipart/form-data" >
+				 <form name="importa" id="formulario" method="post" action="excelproducto.php" enctype="multipart/form-data" >
 <div class="row">
 <div class="col-md-3">
 <p>Col. de Codigo</p>
@@ -84,7 +84,7 @@
 
 <div class="row">
 
-<div class="col-md-3 bg-danger" style="border:1px solid;">  
+<div class="col-md-3 bg-danger" style="border:1px solid;">
   <p>Col. de Imagen</p>
   <input type="text" name="col_imagen" class="form-control  form-control-danger" value="I" required style="text-transform: uppercase" id="inputDanger1">
 </div>
@@ -134,18 +134,28 @@
 </div>
 </div>
 
-              <div>
+              <div class="col-md-3">
           </br>
           <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Importar">
           </div>
+          <div class="col-md-6">
+            <br>
+            <div class="progress">
+  <div class="progress-bar" id="progressor" role="progressbar" aria-valuenow="0"
+  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+    70%
+  </div>
+</div>
+            <p id="results"></p>
+          </div>
 <input type="hidden" value="upload" name="action" />
-</form>	
-                   
+</form>
+
 				</div>
 				</div>
-           
+
             </div>
-           
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -154,4 +164,91 @@
 
     <!-- jQuery -->
 	<?php include 'footer.php';?>
-		
+  <script>
+  var es;
+
+
+  $("#formulario").submit(function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+addLog('Subiendo archivo...');
+$("#enviar").attr('disabled','disabled');
+      $.ajax({
+          url: 'uploadexcelproducto.php',
+          type: 'POST',
+          data: formData,
+          success: function (data) {
+              es = new EventSource('processexcelproducto.php');
+            //a message is received
+            es.addEventListener('message', function(e) {
+                var result = JSON.parse( e.data );
+
+                addLog(result.message);
+
+                if(e.lastEventId == 'CLOSE') {
+                    addLog('Finalizado!');
+                    es.close();
+                    /*var pBar = document.getElementById('progressor');
+                    pBar.value = pBar.max; //max out the progress bar*/
+                    $('.progress-bar').css('width', 100+'%').attr('aria-valuenow', 100);
+                    $('.progress-bar').html('100%');
+                }
+                else {
+                  $('.progress-bar').css('width', result.progress+'%').attr('aria-valuenow', result.progress);
+                  $('.progress-bar').html(result.progress  + "%");
+                    /*var pBar = document.getElementById('progressor');
+                    pBar.value = result.progress;
+                    var perc = document.getElementById('percentage');
+                    perc.innerHTML   = result.progress  + "%";
+                    perc.style.width = (Math.floor(pBar.clientWidth * (result.progress/100)) + 15) + 'px';*/
+                }
+            });
+
+            es.addEventListener('error', function(e) {
+                addLog('Error occurred');
+                es.close();
+            });
+          },
+          cache: false,
+          contentType: false,
+          processData: false
+      });
+  });
+
+  function startTask(filename) {
+      es = new EventSource('excelproducto.php');
+
+      //a message is received
+      es.addEventListener('message', function(e) {
+          var result = JSON.parse( e.data );
+
+          addLog(result.message);
+
+          if(e.lastEventId == 'CLOSE') {
+              addLog('Finalizado!');
+              es.close();
+              var pBar = document.getElementById('progressor');
+              pBar.value = pBar.max; //max out the progress bar
+          }
+          else {
+              var pBar = document.getElementById('progressor');
+              pBar.value = result.progress;
+              var perc = document.getElementById('percentage');
+              perc.innerHTML   = result.progress  + "%";
+              perc.style.width = (Math.floor(pBar.clientWidth * (result.progress/100)) + 15) + 'px';
+          }
+      });
+
+      es.addEventListener('error', function(e) {
+          addLog('Error occurred');
+          es.close();
+      });
+  }
+
+
+  function addLog(message) {
+      var r = document.getElementById('results');
+      r.innerHTML = message + '<br>';
+      //r.scrollTop = r.scrollHeight;
+  }
+  </script>
