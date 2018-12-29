@@ -78,7 +78,7 @@ $stmt = $dbh->prepare("$sql");
         $stmt->execute();
 
 $porcentaje=number_format(100/$members[2]*$i,0);
-  send_message($porcentaje, 'cargando ' . $i . ' of '.$members[2] , $porcentaje);
+  send_message($porcentaje, 'cargando ' . $i . ' de '.$members[2] , $porcentaje);
 }
 
 unlink($members[0]);
