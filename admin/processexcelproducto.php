@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 header('Content-Type: text/event-stream');
 // recommended to prevent caching of event data.
 header('Cache-Control: no-cache');
