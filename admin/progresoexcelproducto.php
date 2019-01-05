@@ -84,6 +84,7 @@ es.addEventListener('message', function(e) {
 
 es.addEventListener('error', function(e) {
   addLog('Error occurred');
+  $("#results").append('<br><a href="productos.php" class="btn btn-warning">Volver</a>');
   es.close();
 });
 
