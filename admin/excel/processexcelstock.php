@@ -21,7 +21,7 @@ $fp = @fopen('excelstock.txt', 'r');
 
 // Add each line to an array
 if ($fp) {
-   $members = explode("\r\n", fread($fp, filesize('excelstock.txt')));
+   $members = explode("\n", fread($fp, filesize('excelstock.txt')));
 }
 fclose($fp);
 
