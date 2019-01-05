@@ -28,8 +28,8 @@ fclose($fp);
 ////////////////////////////////////////////////////////
 if (file_exists ($members[0])){
 /** Clases necesarias */
-require_once('vendor/PHPExcel/Classes/PHPExcel.php');
-require_once('vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
+require_once('../vendor/PHPExcel/Classes/PHPExcel.php');
+require_once('../vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
 
 //echo '<div style="width:100%;margin-top:5%;position:absolute;padding-left:40%;"><h3>Cargando... no cierre esta ventana.</h3><br><img src="assets/images/loadingBar.gif"></div>';
 

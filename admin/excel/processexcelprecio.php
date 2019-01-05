@@ -21,15 +21,15 @@ $fp = @fopen('excelprecio.txt', 'r');
 
 // Add each line to an array
 if ($fp) {
-   $members = explode("\n", fread($fp, filesize('excelprecio.txt')));
+   $members = explode("\r\n", fread($fp, filesize('excelprecio.txt')));
 }
 fclose($fp);
 
 ////////////////////////////////////////////////////////
 if (file_exists ($members[0])){
 /** Clases necesarias */
-require_once('vendor/PHPExcel/Classes/PHPExcel.php');
-require_once('vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
+require_once('../vendor/PHPExcel/Classes/PHPExcel.php');
+require_once('../vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
 
 //echo '<div style="width:100%;margin-top:5%;position:absolute;padding-left:40%;"><h3>Cargando... no cierre esta ventana.</h3><br><img src="assets/images/loadingBar.gif"></div>';
 
@@ -64,7 +64,11 @@ unlink($members[0]);
 unlink("excelprecio.txt");
 send_message('CLOSE', 'Process complete',100);
 }
-
+else {
+  {
+send_message('1','file not found',1);
+  }
+}
 
 
 ?>
