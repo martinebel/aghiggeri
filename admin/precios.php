@@ -1,19 +1,19 @@
-<?php 
+<?php
 require '../db.php';
 $mensaje="";
 extract($_POST);
 
 if ((isset($_POST['action']))&&($_POST['action'] == "upload")){
 //cargamos el archivo al servidor con el mismo nombre
-//solo le agregue el sufijo bak_ 
-	$archivo = $_FILES['excel']['name'];
+//solo le agregue el sufijo bak_
+/*	$archivo = $_FILES['excel']['name'];
 	$tipo = $_FILES['excel']['type'];
 	$destino = "bak_".$archivo;
 	if (copy($_FILES['excel']['tmp_name'],$destino)) echo "";
 	else echo "Error Al Cargar el Archivo";
-////////////////////////////////////////////////////////
-if (file_exists ("bak_".$archivo)){ 
-/** Clases necesarias */
+
+if (file_exists ("bak_".$archivo)){
+
 require_once('vendor/PHPExcel/Classes/PHPExcel.php');
 require_once('vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
 
@@ -22,13 +22,13 @@ require_once('vendor/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
 // Cargando la hoja de cálculo
 $objReader = new PHPExcel_Reader_Excel2007();
 $objPHPExcel = $objReader->load("bak_".$archivo);
-$objFecha = new PHPExcel_Shared_Date();       
+$objFecha = new PHPExcel_Shared_Date();
 
 // Asignar hoja de excel activa
 $objPHPExcel->setActiveSheetIndex(0);
 
 
-        // Llenamos el arreglo con los datos  del archivo xlsx 
+        // Llenamos el arreglo con los datos  del archivo xlsx
 for ($i=$fila;$i<=$fila_fin;$i++){
 $codigo = $objPHPExcel->getActiveSheet()->getCell(strtoupper($col_codigo).$i)->getCalculatedValue();
 $precio = $objPHPExcel->getActiveSheet()->getCell(strtoupper($col_nombre).$i)->getCalculatedValue();
@@ -44,13 +44,13 @@ echo '<div class="alert alert-success" role="alert">ARCHIVO IMPORTADO CON EXITO<
 unlink($destino);
 include 'pages/precios.tpl.php';
 }
-//si por algo no cargo el archivo bak_ 
+//si por algo no cargo el archivo bak_
 else{
 echo '<div class="alert alert-danger" role="alert">No se puede subir el archivo de Excel. Por favor, verifique los datos ingresados.</div>';
 include 'pages/precios.tpl.php';
 }
-
-}	
+*/
+}
 elseif((isset($_POST['action']))&&($_POST['action'] == "precios")){
 	$mostrar="0";
 if(isset($_POST['mostrarprecio'])){$mostrar="1";}
