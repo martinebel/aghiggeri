@@ -6,12 +6,12 @@
                     <h1 class="page-header">Importar Excel: Precios</h1>
                 </div>
             </div>
-           
+
              <div class="row">
                 <div class="col-lg-12">
 				 <div class="panel-body">
 
-				 <form name="importa" method="post" action="precios.php" enctype="multipart/form-data" >
+				 <form name="importa" method="post" action="excel/uploadpreciosexcel.php" enctype="multipart/form-data" >
 <div class="row">
 <div class="col-md-3">
 <p>Col. de Codigo</p>
@@ -44,7 +44,7 @@
           <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Importar">
           </div>
 <input type="hidden" value="upload" name="action" />
-</form>	
+</form>
 <hr>
  <form name="importa" method="post" action="precios.php" >
   <p><strong>Configuracion</strong></p>
@@ -53,7 +53,7 @@
     $estado="";
     $stmt = $dbh->prepare("SELECT mostrarprecio from config");
         $stmt->execute();
-    $result = $stmt->fetchAll(); 
+    $result = $stmt->fetchAll();
     foreach($result as $row)
     {
       if($row["mostrarprecio"]=="1"){$estado=" checked";}
@@ -66,12 +66,12 @@
 </div>
     <input type="submit" id="guardar" name="guardar" class="btn btn-success" value="Guardar Configuracion">
 <input type="hidden" value="precios" name="action" />
-    </form>          
+    </form>
 				</div>
 				</div>
-           
+
             </div>
-           
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -80,4 +80,3 @@
 
     <!-- jQuery -->
 	<?php include 'footer.php';?>
-		
