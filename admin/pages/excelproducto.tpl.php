@@ -42,7 +42,7 @@
 				  ?>
   <strong>Atencion!</strong> Esta acción no modifica los productos ya existentes, sino que INSERTA NUEVOS REGISTROS con la información contenida en el Excel. Prestar atención al contenido del Excel, ya que si por alguna razón hay datos duplicados esto no será controlado, dando como resultado productos duplicados o errores de inserción.<br>Tamaño maximo de archivo: <?php echo $qty;?>
 </div>
-				 <form name="importa" id="formulario" method="post" action="uploadexcelproducto.php" enctype="multipart/form-data" >
+				 <form name="importa" id="formulario" method="post" action="excel/uploadexcelproducto.php" enctype="multipart/form-data" >
 <div class="row">
 <div class="col-md-3">
 <p>Col. de Codigo</p>
@@ -138,7 +138,7 @@
           </br>
           <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Importar">
           </div>
-          
+
 <input type="hidden" value="upload" name="action" />
 </form>
 
@@ -155,86 +155,4 @@
 
     <!-- jQuery -->
 	<?php include 'footer.php';?>
-  <script>
-  var es;
-
-
-  /*$("#formulario").submit(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-addLog('Subiendo archivo...');
-$("#enviar").attr('disabled','disabled');
-      $.ajax({
-          url: 'uploadexcelproducto.php',
-          type: 'POST',
-          data: formData,
-          success: function (data) {
-              es = new EventSource('processexcelproducto.php');
-            //a message is received
-            es.addEventListener('message', function(e) {
-                var result = JSON.parse( e.data );
-
-                addLog(result.message);
-
-                if(e.lastEventId == 'CLOSE') {
-                    addLog('Finalizado!');
-                    es.close();
-
-                    $('.progress-bar').css('width', 100+'%').attr('aria-valuenow', 100);
-                    $('.progress-bar').html('100%');
-                }
-                else {
-                  $('.progress-bar').css('width', result.progress+'%').attr('aria-valuenow', result.progress);
-                  $('.progress-bar').html(result.progress  + "%");
-
-                }
-            });
-
-            es.addEventListener('error', function(e) {
-                addLog('Error occurred');
-                es.close();
-            });
-          },
-          cache: false,
-          contentType: false,
-          processData: false
-      });
-  });
-
-  function startTask(filename) {
-      es = new EventSource('excelproducto.php');
-
-      //a message is received
-      es.addEventListener('message', function(e) {
-          var result = JSON.parse( e.data );
-
-          addLog(result.message);
-
-          if(e.lastEventId == 'CLOSE') {
-              addLog('Finalizado!');
-              es.close();
-              var pBar = document.getElementById('progressor');
-              pBar.value = pBar.max; //max out the progress bar
-          }
-          else {
-              var pBar = document.getElementById('progressor');
-              pBar.value = result.progress;
-              var perc = document.getElementById('percentage');
-              perc.innerHTML   = result.progress  + "%";
-              perc.style.width = (Math.floor(pBar.clientWidth * (result.progress/100)) + 15) + 'px';
-          }
-      });
-
-      es.addEventListener('error', function(e) {
-          addLog('Error occurred');
-          es.close();
-      });
-  }
-
-
-  function addLog(message) {
-      var r = document.getElementById('results');
-      r.innerHTML = message + '<br>';
-      //r.scrollTop = r.scrollHeight;
-  }*/
-  </script>
+  
