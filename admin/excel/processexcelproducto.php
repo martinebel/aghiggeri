@@ -15,13 +15,13 @@ function send_message($id, $message, $progress) {
     flush();
 }
 
-require '../db.php';
+require '../../db.php';
 set_time_limit(0);
-$fp = @fopen('./excel/excelproducto.txt', 'r');
+$fp = @fopen('excelproducto.txt', 'r');
 
 // Add each line to an array
 if ($fp) {
-   $members = explode("\n", fread($fp, filesize('./excel/excelproducto.txt')));
+   $members = explode("\n", fread($fp, filesize('excelproducto.txt')));
 }
 fclose($fp);
 
@@ -83,7 +83,7 @@ $porcentaje=number_format(100/$members[2]*$i,0);
 }
 
 unlink($members[0]);
-unlink("./excel/excelproducto.txt");
+unlink("excelproducto.txt");
 send_message('CLOSE', 'Process complete',100);
 }
 

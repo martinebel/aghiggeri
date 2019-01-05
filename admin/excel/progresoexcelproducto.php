@@ -12,7 +12,7 @@
     <title>Agustin Ghiggeri</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -58,7 +58,7 @@ aria-valuemin="0" aria-valuemax="100" style="width:0%">
 </div>
 </div>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
   <script>
 var es;
 es = new EventSource('processexcelproducto.php');
@@ -71,7 +71,7 @@ es.addEventListener('message', function(e) {
   if(e.lastEventId == 'CLOSE') {
       addLog('Finalizado!');
       es.close();
-      $("#results").append('<br><a href="productos.php" class="btn btn-success">Volver</a>');
+      $("#results").append('<br><a href="../productos.php" class="btn btn-success">Volver</a>');
       $('.progress-bar').css('width', 100+'%').attr('aria-valuenow', 100);
       $('.progress-bar').html('100%');
   }
@@ -84,7 +84,7 @@ es.addEventListener('message', function(e) {
 
 es.addEventListener('error', function(e) {
   addLog('Error occurred');
-  $("#results").append('<br><a href="productos.php" class="btn btn-warning">Volver</a>');
+  $("#results").append('<br><a href="../productos.php" class="btn btn-warning">Volver</a>');
   es.close();
 });
 

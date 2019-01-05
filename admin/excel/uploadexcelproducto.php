@@ -8,11 +8,11 @@ set_time_limit(0);
 if(isset($_FILES['excel']['name'])){
 	$archivo = $_FILES['excel']['name'];
 	$tipo = $_FILES['excel']['type'];
-	$destino = "./excel/bak_".$archivo;
+	$destino = "bak_".$archivo;
 	if (copy($_FILES['excel']['tmp_name'],$destino)){
-		$myFile2 = "./excel/excelproducto.txt";
+		$myFile2 = "excelproducto.txt";
 		$myFileLink2 = fopen($myFile2, 'w+') or die("Can't open file.");
-		fwrite($myFileLink2, "./excel/bak_".$archivo.PHP_EOL);
+		fwrite($myFileLink2, "bak_".$archivo.PHP_EOL);
 		fwrite($myFileLink2, $fila.PHP_EOL);
 		fwrite($myFileLink2, $fila_fin.PHP_EOL);
 
