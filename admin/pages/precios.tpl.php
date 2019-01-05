@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
 				 <div class="panel-body">
 
-				 <form name="importa" method="post" action="excel/uploadpreciosexcel.php" enctype="multipart/form-data" >
+				 <form name="importa" method="post" action="excel/uploadexcelprecio.php" enctype="multipart/form-data" >
 <div class="row">
 <div class="col-md-3">
 <p>Col. de Codigo</p>
