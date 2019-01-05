@@ -138,16 +138,7 @@
           </br>
           <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Importar">
           </div>
-          <div class="col-md-6">
-            <br>
-            <div class="progress">
-  <div class="progress-bar" id="progressor" role="progressbar" aria-valuenow="0"
-  aria-valuemin="0" aria-valuemax="100" style="width:0%">
-    70%
-  </div>
-</div>
-            <p id="results"></p>
-          </div>
+          
 <input type="hidden" value="upload" name="action" />
 </form>
 
