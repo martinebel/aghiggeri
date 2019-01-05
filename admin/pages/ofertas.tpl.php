@@ -6,14 +6,14 @@
                     <h1 class="page-header">Importar Excel: Ofertas</h1>
                 </div>
             </div>
-           
+
              <div class="row">
                 <div class="col-lg-12">
 				 <div class="panel-body">
 				  <div class="alert alert-warning">
   <strong>Atencion!</strong> Esta acción no modifica las ofertas ya existentes, sino que elimina todos los registros y carga toda la información contenida en el Excel. El formato de fechas es <strong>aaaa-mm-dd</strong>
 </div>
-				 <form name="importa" method="post" action="ofertas.php" enctype="multipart/form-data" >
+				 <form name="importa" method="post" action="excel/uploadexceloferta.php" enctype="multipart/form-data" >
 <div class="row">
 <div class="col-md-3">
 <p>Col. de Codigo</p>
@@ -54,13 +54,13 @@
           <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Importar">
           </div>
 <input type="hidden" value="upload" name="action" />
-</form>	
-                   
+</form>
+
 				</div>
 				</div>
-           
+
             </div>
-           
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -69,4 +69,3 @@
 
     <!-- jQuery -->
 	<?php include 'footer.php';?>
-		
