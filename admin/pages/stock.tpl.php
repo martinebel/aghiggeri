@@ -6,12 +6,12 @@
                     <h1 class="page-header">Importar Excel: Stock</h1>
                 </div>
             </div>
-           
+
              <div class="row">
                 <div class="col-lg-12">
 				 <div class="panel-body">
 
-				 <form name="importa" method="post" action="stock.php" enctype="multipart/form-data" >
+				 <form name="importa" method="post" action="excel/uploadexcelstock.php" enctype="multipart/form-data" >
 <div class="row">
 <div class="col-md-3">
 <p>Col. de Codigo</p>
@@ -44,14 +44,14 @@
           <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Importar">
           </div>
 <input type="hidden" value="upload" name="action" />
-</form>	
+</form>
 
-        
+
 				</div>
 				</div>
-           
+
             </div>
-           
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -60,4 +60,3 @@
 
     <!-- jQuery -->
 	<?php include 'footer.php';?>
-		
