@@ -7,11 +7,11 @@ set_time_limit(0);
 if(isset($_FILES['excel']['name'])){
 	$archivo = $_FILES['excel']['name'];
 	$tipo = $_FILES['excel']['type'];
-	$destino = "bak_".$archivo;
+	$destino = "./excel/bak_".$archivo;
 	if (copy($_FILES['excel']['tmp_name'],$destino)){
-		$myFile2 = "excelproducto.txt";
+		$myFile2 = "./excel/excelproducto.txt";
 		$myFileLink2 = fopen($myFile2, 'w+') or die("Can't open file.");
-		fwrite($myFileLink2, "bak_".$archivo.PHP_EOL);
+		fwrite($myFileLink2, "./excel/bak_".$archivo.PHP_EOL);
 		fwrite($myFileLink2, $fila.PHP_EOL);
 		fwrite($myFileLink2, $fila_fin.PHP_EOL);
 
@@ -30,6 +30,7 @@ if(isset($_FILES['excel']['name'])){
 		fwrite($myFileLink2, $col_descuento.PHP_EOL);
 		fwrite($myFileLink2, $col_stock.PHP_EOL);
 		fclose($myFileLink2);
+		header('Location: progresoexcelproducto.php');
 	 }
 	else {echo "ERROR";}
 }
