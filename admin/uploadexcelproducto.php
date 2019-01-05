@@ -1,4 +1,5 @@
 <?php
+echo "Subiendo archivo...";
 extract($_POST);
 set_time_limit(0);
 
