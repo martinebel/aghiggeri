@@ -104,7 +104,7 @@
   <script>
 
   var uid="<?php echo $_SESSION['uid'];?>";
-  var cid="<?php echo (isset($_SESSION['cid'])?$_SESSION['cid']:"");?>";
+  var cid="<?php echo (isset($_SESSION['cid'])?$_SESSION['cid']:"0");?>";
   function addCart(id)
   {
 	  swal({

@@ -1,7 +1,12 @@
-<?php require 'db.php';
+<?php
+error_reporting(E_ALL);
+session_start();
+
+
+require 'db.php';
 
 echo '<p style="display:none">'.date('Y-m-d_H:i:s').'</p>';
-session_start();
+
 
 include_once 'functions.php';
 $funciones = new Funciones();
@@ -18,10 +23,19 @@ $funciones = new Funciones();
  }
 
 
- if( !isset($_SESSION['uid']) ){$_SESSION['uid']=generateSession();$_SESSION['tipousuario']="1";}
+ if (isset($_SESSION['uid']))
+  {
+   echo '<p style="display:none">1</p>';
+  }else
+    {
+    echo '<script>window.location.href="test.php";</script>';exit();
+    }
 
- /*echo "uid:". $_SESSION['uid']."\n";
-echo "id:" .session_id();*/
+ /*if (!isset($_SESSION['uid']))
+  {
+ $_SESSION['uid']=generateSession();$_SESSION['tipousuario']="1";
+
+}*/
 
      if(isset($_POST['action']))
   {
