@@ -276,8 +276,8 @@ $stmt = $dbh->prepare($consulta);
 						}
 						}
 			  echo '</h3>';
-  if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
-			 if($funciones->showPrices()){
+  //if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
+			// if($funciones->showPrices()){
                if($funciones->esOferta($row['id']))
 					{
 
@@ -288,17 +288,17 @@ $stmt = $dbh->prepare($consulta);
 					{
 						echo '<div class="pi-price">$'.number_format($funciones->getPrecio($row['id'],$_SESSION['tipousuario']),2,',','.').'<br><small>Precio Neto con IVA Incluido</small><br><small>&nbsp;</small></div>';
 					}
-				}
-			}
+			//	}
+		//	}
 					 if($funciones->esNuevo($row['id']))
 			   {
 				   echo '<div class="sticker sticker-new"></div>';
 			   }
-			     if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
-			   if($funciones->showPrices()){
+			    // if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
+			  // if($funciones->showPrices()){
               echo '<a href="#" onclick="addCart('.$row['id'].');" class="btn add2cart">Comprar</a>';
-    }
-}
+    //}
+//}
     echo '</div>
         </div>';
 		}

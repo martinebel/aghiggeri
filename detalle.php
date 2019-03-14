@@ -281,8 +281,8 @@
 
 						<p class="product-description" style="color:#e84d1c;">'.$row['marcaauto'].' '.$row['modeloauto'].' | Codigo '.$row['codigo'].' | Stock: '.($row['stock']>=2?'DISPONIBLE':'CONSULTAR').'</p>
 						<p>'.$row['descripcion'].'</p>';
-						  if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
-					if($funciones->showPrices()){
+				//	  if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
+			//		if($funciones->showPrices()){
 						if($funciones->esOferta($row['id']))
 					{
 						echo '<h4 class="price"><span><small class="precioviejo">$'.number_format($row['precio'],2,',','.').'</small> $'.number_format($funciones->getPrecio($row['id'],$_SESSION['tipousuario']),2,',','.').'</span>&nbsp;<small>Precio Neto con IVA Incluido</small><br><br><small><strong>Oferta Valida hasta el '.$funciones->getFinOferta($row['id']).'</strong></small></h4>';
@@ -298,8 +298,8 @@
 						echo '<div class="action">
 							<button class="add-to-cart btn btn-default" type="button" onclick="addCart('.$row['id'].');">Comprar</button>
 						</div>';
-						}
-						}
+				//		}
+				//		}
 						echo '<br>
 						<table class="table table-stripped">';
 						if($row['desclarga']!="")

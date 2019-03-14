@@ -290,8 +290,8 @@ echo '</select></li>';
               </div>
 			  <div class="col-md-9">
                <h3><a href="detalle.php?id='.$row['id'].'">'.$row['descripcion'].'</a><br> <small style=""><strong>'.$row['marca'].' '.$row['codigo'].'</strong> <span class="pull-right"><strong>Stock:</strong> '.($row['stock']>=2?'DISPONIBLE':'CONSULTAR').'</span></small><br>';
-                 if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
-			  if($funciones->showPrices()){
+ //if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
+			  //if($funciones->showPrices()){
 			  if($row["cantoferta"]>0)
 						{
 							echo '<br><small>GANE '.$row["descuento"]."% EXTRA!! Comprando ".$row["cantoferta"]." unidades</small><br>";
@@ -309,8 +309,8 @@ echo '</select></li>';
 
 
              echo '<a href="#" onclick="addCart('.$row['id'].');" class="btn add2cart">Comprar</a>';
-         }
-     }
+        // }
+  //   }
            echo '</div>
 	</div>';
 		}

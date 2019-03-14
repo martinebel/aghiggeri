@@ -223,7 +223,7 @@ echo '</select></li>';
 <?php
 if( !isset($_SESSION['cid']) ){
    echo '<div class="col-md-12">
-     <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i>  Para ver precios y hacer pedidos, por favor <a href="login.php">inicie su sesion</a> o <a href="register.php">registrese si no tiene una cuenta</a></div>
+     <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i>  Recuerde <strong><a href="login.php">iniciar su sesion</a></strong> o <strong><a href="register.php">registrarse si no tiene una cuenta.</a></strong> Puede llevar el control de sus pedidos y acceder a importantes descuentos.</div>
    </div>';
  }
    ?>
@@ -284,8 +284,8 @@ if( !isset($_SESSION['cid']) ){
                 </div>
               </div>
               <h3><a href="detalle.php?id='.$row['id'].'">'.$row['descripcion'].'</a><br> <small style=""><strong>'.$row['marca'].' '.$row['codigo'].'</strong> <span class="pull-right"><strong>Stock:</strong> '.($row['stock']>=2?'DISPONIBLE':'CONSULTAR').'</span></small><br>';
-              if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
-			  if($funciones->showPrices()){
+    //          if((isset($_SESSION["cid"])) && ($_SESSION["tipousuario"]!="0")){
+		//	  if($funciones->showPrices()){
 			  if($row["cantoferta"]>0)
 						{
 							echo '<br><small>GANE '.$row["descuento"]."% EXTRA!! Comprando ".$row["cantoferta"]." unidades</small><br>";
@@ -302,8 +302,8 @@ if( !isset($_SESSION['cid']) ){
 						echo '<div class="pi-price">$'.number_format($funciones->getPrecio($row['id'],$_SESSION['tipousuario']),2,',','.').'<br><small>Precio Neto con IVA Incluido</small><br><small>&nbsp;</small></div>';
 					}
                echo '<a href="#" onclick="addCart('.$row['id'].');" class="btn add2cart">Comprar</a>';
-           }
-			  }
+        //   }
+			 // }
 			   if($funciones->esNuevo($row['id']))
 			   {
 				   echo '<div class="sticker sticker-new"></div>';
