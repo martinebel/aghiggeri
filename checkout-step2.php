@@ -23,7 +23,7 @@
 echo '<script>window.location.href="checkout-step1.php?e=2";</script>';exit();
   }
 
-   $stmt=$dbh->prepare("insert into clientes (idcliente,razonsocial,cuit,telefono,direccion,localidad,provincia,email,password,tipo,idsistema,iva) values (NULL,'".$cliente."','".$dni."','".$telefono."','".$direccion."','".$localidad."','".$provincia."','".$email."','".$pass."',1,NULL,'".$iva."');");
+   $stmt=$dbh->prepare("insert into clientes (idcliente,razonsocial,cuit,telefono,direccion,localidad,provincia,email,password,tipo,idsistema,iva) values (NULL,'".$cliente."','".$dni."','".$telefono."','".$direccion."','".$localidad."','".$provincia."','".$email."','".$pass."',1,3389,'".$iva."');");
 	 $stmt->execute();
 	 $idcliente=$dbh->lastInsertId();
    $msg="<p><strong>Nuevo Registro de Cliente en agustinghiggeri.com.ar</strong></p>

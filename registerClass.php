@@ -17,14 +17,14 @@ $password=$_POST['pass'];
 //revisar que este cuit no exista en la base de datos.
 $stmt = $dbh->prepare("select * from clientes where cuit='".$cuit."'");
  $stmt->execute();
- $result = $stmt->fetchAll(); 
+ $result = $stmt->fetchAll();
 $contador=$stmt->rowCount();
 if($contador==0)
 {
-	 $stmt = $dbh->prepare("insert into clientes values(NULL,'".$nombre."','".$cuit."','".$telefono."','".$direccion."','".$localidad."','".$provincia."','".$email."','".$password."',1,NULL,'".$iva."')");
+	 $stmt = $dbh->prepare("insert into clientes values(NULL,'".$nombre."','".$cuit."','".$telefono."','".$direccion."','".$localidad."','".$provincia."','".$email."','".$password."',1,3389,'".$iva."')");
 	   $stmt->execute();
-	   
-        
+
+
         $msg="<p><strong>Nuevo Registro de Cliente en agustinghiggeri.com.ar</strong></p>
         <hr>
         <p><strong>Codigo generado: </strong>".$dbh->lastInsertId()."</p>
@@ -38,7 +38,7 @@ $mail = new PHPMailer;
 
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
-$mail->isSMTP();  
+$mail->isSMTP();
 $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,
@@ -53,7 +53,7 @@ $mail->Password = 'WeBapg25m';                           // SMTP password
 $mail->SMTPSecure = false;                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 $mail->setFrom('clientes@agustinghiggeri.com.ar', 'Agustin Ghiggeri');
-$mail->addAddress('clientes@agustinghiggeri.com.ar', 'Agustin Ghiggeri');     
+$mail->addAddress('clientes@agustinghiggeri.com.ar', 'Agustin Ghiggeri');
 //$mail->addAddress('ebel.martin@gmail.com', 'Martin Ebel');
 
 $mail->isHTML(true);                                  // Set email format to HTML
