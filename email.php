@@ -7,7 +7,7 @@ $mail = new PHPMailer;
 
 $mail->SMTPDebug = 3;                               // Enable verbose debug output
 
-$mail->isSMTP();  
+$mail->isSMTP();
 $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,
@@ -36,9 +36,9 @@ $mail->Body    = $mensaje;
 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 //$mail->send();
 if(!$mail->send()) {
-	echo json_encode(array('message' => 'Message could not be sent.', 'msg' => $mail->ErrorInfo,'code'=>404));
+//	echo json_encode(array('message' => 'Message could not be sent.', 'msg' => $mail->ErrorInfo,'code'=>404));
 } else {
-    echo json_encode(array('message' => 'Message sent.', 'code'=>200));
+//    echo json_encode(array('message' => 'Message sent.', 'code'=>200));
 }
 }
 ?>
