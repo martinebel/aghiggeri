@@ -5,7 +5,7 @@ function sendMail($asunto,$mensaje){
 
 $mail = new PHPMailer;
 
-$mail->SMTPDebug = 3;                               // Enable verbose debug output
+$mail->SMTPDebug = 0;                               // Enable verbose debug output
 
 $mail->isSMTP();
 $mail->SMTPOptions = array(
