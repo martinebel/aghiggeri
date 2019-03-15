@@ -261,3 +261,12 @@ body {
       <?php
       include 'footer.php';
       ?>
+<script>
+$(document).on("input", "#dni", function() {
+  this.value = this.value.replace(/\D/g,'');
+});
+
+$(document).on("input", "#email", function() {
+  this.value = this.value.replace(/\D/g,'');
+});
+</script>
