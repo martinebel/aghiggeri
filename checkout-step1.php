@@ -173,7 +173,7 @@ body {
               <div class="col-md-6 col-xs-12">
                 <div class="form-group">
                   <label for="dni">DNI / CUIT</label>
-                  <input type="text" class="form-control" id="dni" name="dni"  required>
+                  <input type="text" class="form-control cuit" id="dni" name="dni"  required>
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
@@ -234,7 +234,7 @@ body {
               <div class="col-md-6 col-xs-12">
                 <div class="form-group">
                   <label for="email">CUIT</label>
-                  <input type="text" class="form-control" id="email" name="email"  required>
+                  <input type="text" class="form-control cuit" id="email" name="email"  required>
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
@@ -262,11 +262,8 @@ body {
       include 'footer.php';
       ?>
 <script>
-$(document).on("input", "#dni", function() {
+$(document).on("input", ".cuit", function() {
   this.value = this.value.replace(/\D/g,'');
 });
 
-$(document).on("input", "#email", function() {
-  this.value = this.value.replace(/\D/g,'');
-});
 </script>
