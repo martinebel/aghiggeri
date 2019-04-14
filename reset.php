@@ -11,10 +11,10 @@ die();
 
   if(isset($_POST["password"]))
   {
-    
+
     $stmt = $dbh->prepare("select * from clientes where password='".$_POST["token"]."'");
         $stmt->execute();
-    $result = $stmt->fetchAll(); 
+    $result = $stmt->fetchAll();
     $totalitems=$stmt->rowCount();
     if($totalitems>0)
     {
@@ -27,10 +27,10 @@ die();
 
 $stmt = $dbh->prepare("update clientes set password='".$_POST["password"]."' where idcliente='".$codigo."'");
 
-        $stmt->execute();      
+        $stmt->execute();
       //enviar mail
       $mail = new PHPMailer;
-$mail->isSMTP();  
+$mail->isSMTP();
 $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,
@@ -41,7 +41,7 @@ $mail->SMTPOptions = array(
 $mail->Host = 'mail.agustinghiggeri.com.ar';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'clientes@agustinghiggeri.com.ar';                 // SMTP username
-$mail->Password = 'WeBapg25m';                           // SMTP password
+$mail->Password = 'maYo30apG549W';                           // SMTP password
 $mail->SMTPSecure = false;                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 $mail->setFrom('clientes@agustinghiggeri.com.ar', 'Agustin Ghiggeri');
@@ -61,15 +61,15 @@ $status=true;
     }
   }
   ?>
-    
-    
-    
-    
+
+
+
+
   <div class="container">
    <div class="row">
       <div class="col-md-4 col-md-offset-4" style="margin-top:40px;">
                 <div class="login-panel panel panel-default">
-                   
+
                     <div class="panel-body">
 							<?php
 
@@ -89,24 +89,24 @@ else
                                <p id="matchAlert" class="text-danger" style="display: none">La clave ingresada no coincide. Ambos campos deben ser iguales</p>
                                 <input type="hidden" name="token" value="'.$_REQUEST["token"].'">
                                 <a href="#" class="btn btn-lg btn-success btn-block" onclick="validate();">Guardar</a>
-                                
+
                             </fieldset>
                         </form>';
 }
 
 ?>
-      
-                       
+
+
                     </div>
                 </div>
             </div>
         </div>
-</div>  
-    
-    
-    
-    
-    
+</div>
+
+
+
+
+
   <?php
   include 'footer.php';
   ?>

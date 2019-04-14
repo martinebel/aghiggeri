@@ -55,7 +55,7 @@ if ( ! isset($_SESSION['idusuario']))
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Agustin Ghiggeri - Administracion - MODO DE PRUEBA</a>
+                <a class="navbar-brand" href="index.html">Agustin Ghiggeri - Administracion</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -145,10 +145,6 @@ if ( ! isset($_SESSION['idusuario']))
 						
 						 <li>
                             <a href="usuarios.php"><i class="fa fa-lock fa-fw"></i> Usuarios</a>
-                        </li>
-
-                         <li>
-                            <a href="vendedores.php"><i class="fa fa-user fa-fw"></i> Vendedores</a>
                         </li>
 						
 						<li>

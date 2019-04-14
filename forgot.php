@@ -6,12 +6,12 @@
 
   if(isset($_POST["cuit"]))
   {
-    //comprobar que el cuit exista. 
+    //comprobar que el cuit exista.
     //si no existe, $status=false
     //si existe mandar mail, $status=true
     $stmt = $dbh->prepare("select * from clientes where cuit='".$_POST["cuit"]."'");
         $stmt->execute();
-    $result = $stmt->fetchAll(); 
+    $result = $stmt->fetchAll();
     $totalitems=$stmt->rowCount();
     if($totalitems>0)
     {
@@ -23,10 +23,10 @@
       }
       $token=md5(date('Y-m-d h:i:s'));
 $stmt = $dbh->prepare("update clientes set password='".$token."' where cuit='".$_POST["cuit"]."'");
-        $stmt->execute();      
+        $stmt->execute();
       //enviar mail
       $mail = new PHPMailer;
-$mail->isSMTP();  
+$mail->isSMTP();
 $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,
@@ -37,7 +37,7 @@ $mail->SMTPOptions = array(
 $mail->Host = 'mail.agustinghiggeri.com.ar';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'clientes@agustinghiggeri.com.ar';                 // SMTP username
-$mail->Password = 'WeBapg25m';                           // SMTP password
+$mail->Password = 'maYo30apG549W';                           // SMTP password
 $mail->SMTPSecure = false;                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 $mail->setFrom('clientes@agustinghiggeri.com.ar', 'Agustin Ghiggeri');
@@ -58,15 +58,15 @@ $status=true;
     }
   }
   ?>
-    
-    
-    
-    
+
+
+
+
   <div class="container">
    <div class="row">
       <div class="col-md-4 col-md-offset-4" style="margin-top:40px;">
                 <div class="login-panel panel panel-default">
-                   
+
                     <div class="panel-body">
 							<?php
 if(isset($_POST["cuit"]))
@@ -80,7 +80,7 @@ else
 }
 }
 ?>
-      
+
                         <form action="forgot.php" method="post">
                             <fieldset>
                               <div class="form-group">
@@ -89,23 +89,23 @@ else
                                 <div class="form-group">
                                     <input class="form-control" placeholder="CUIT" name="cuit" id="cuit" type="text" autofocus required>
                                 </div>
-                               
-                                
+
+
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="Enviar Mail">
-                                
+
                             </fieldset>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-</div>  
-    
-    
-    
-    
-    
+</div>
+
+
+
+
+
   <?php
   include 'footer.php';
   ?>

@@ -61,8 +61,8 @@ require '../db.php';
                                         <td>'.$row['codigo'].'</td>
                                         <td>'.$row['nombre'].'</td>
 										<td>'.$row['cant'].'</td>
-                                        <td>$'.number_format($row['precio'],2,',','.').'</td>
-										<td>$'.number_format($row['precio']*$row['cant'],2,',','.').'</td>
+                                        <td>$'.number_format($row['precio'],2).'</td>
+										<td>$'.number_format($row['precio']*$row['cant'],2).'</td>
                                     </tr>';
 									if($tipo=="odd"){$tipo="even";}else{$tipo="odd";}
 		}
