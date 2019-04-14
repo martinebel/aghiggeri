@@ -1,4 +1,4 @@
-<?php require 'db.php';?>
+<?php require '../db.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,15 +10,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agustin Ghiggeri</title> 
+    <title>Agustin Ghiggeri</title>
  <!-- Bootstrap Core CSS -->
     <link href="css/printer.css" rel="stylesheet">
 </head>
 <?php
 $stmt = $dbh->prepare("select clientes.*,pedidos.fecha,pedidos.observaciones from pedidos inner join clientes on clientes.idcliente=pedidos.cliente where pedidos.id=".$_REQUEST['id']."");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
-		
+		$result = $stmt->fetchAll();
+
 		foreach($result as $row)
 		{
 			$cliente=$row['razonsocial'];
@@ -88,19 +88,19 @@ $stmt = $dbh->prepare("select clientes.*,pedidos.fecha,pedidos.observaciones fro
 		//contar items del carrito
 		$stmt = $dbh->prepare("select productos.*,detallepedidos.cant from detallepedidos inner join productos on productos.id=detallepedidos.idproducto where detallepedidos.idpedido=".$_REQUEST['id']."");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		$total=0;
 		foreach($result as $row)
 		{
 			echo '<tr>
 			<td data-th="Product">
-							'.$row['codigo'].'	
+							'.$row['codigo'].'
 							</td>
 							<td data-th="Product">
-							'.$row['cant'].'	
+							'.$row['cant'].'
 							</td>
 							<td data-th="Product">
-							'.$row['nombre'].' '.$row["marca"].' ('.$row["marcaauto"].' '.$row["modeloauto"].')	
+							'.$row['nombre'].' '.$row["marca"].' ('.$row["marcaauto"].' '.$row["modeloauto"].')
 							</td>
 							<td style="text-align:right">'.number_format(($row['precio']*$row['cant']),2,',','.').'</td>
 						</tr>
@@ -108,14 +108,14 @@ $stmt = $dbh->prepare("select clientes.*,pedidos.fecha,pedidos.observaciones fro
 					$total+=($row['precio']*$row['cant']);
 		}
 		?>
-					</tbody>	
+					</tbody>
 					<tfoot>
 						<tr>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td style="text-align:right;border-top:1px solid #ccc;"><strong>Total $<?php echo number_format($total,2,',','.');?></strong></td>
-							
+
 						</tr>
 					</tfoot>
 				</table>
@@ -139,13 +139,13 @@ $stmt = $dbh->prepare("select clientes.*,pedidos.fecha,pedidos.observaciones fro
 <script>
 function impresion()
 {
-	
+
 	$("#btn1").css("display","none");
 	$("#btn2").css("display","none");
 	 window.print();
 	 	$("#btn1").css("display","inline");
 	$("#btn2").css("display","inline");
-	 
+
 }
 </script>
 

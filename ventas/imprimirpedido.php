@@ -1,6 +1,6 @@
 <?php
-require 'db.php';
-include_once 'functions.php';
+require '../db.php';
+include_once '../functions.php';
 $funciones = new Funciones();
 ?>
 <html lang="en">
@@ -18,12 +18,12 @@ $funciones = new Funciones();
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	</head>
-	
+
 	<body>
 	<?php
 							$stmt = $dbh->prepare("SELECT clientes.*,pedidos.* from pedidos inner join clientes on clientes.idcliente=pedidos.cliente where pedidos.id=".$_REQUEST['id']);
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
 			$tipousuario=$row['tipo'];
@@ -39,8 +39,8 @@ $funciones = new Funciones();
 			</div>';
 		}
 		?>
-	
-	
+
+
 	 <table width="100%" style="text-align:left;" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
@@ -54,10 +54,10 @@ $funciones = new Funciones();
                                 <tbody>
 								<?php
 								$tipo="odd";
-								
+
 								$stmt = $dbh->prepare("SELECT productos.*,detallepedidos.cant from detallepedidos inner join productos on productos.id=detallepedidos.idproducto where idpedido=".$_REQUEST['id']);
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
 			echo ' <tr class="'.$tipo.'">
@@ -70,7 +70,7 @@ $funciones = new Funciones();
 									if($tipo=="odd"){$tipo="even";}else{$tipo="odd";}
 		}
 								?>
-								
+
 								</tbody>
 								</table>
 	</body>
