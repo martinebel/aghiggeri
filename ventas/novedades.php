@@ -1,8 +1,8 @@
   <?php
   include 'header.php';
   ?>
-    
-    
+
+
    <?php
     $filtro="";
    $fMarca="%";
@@ -18,7 +18,7 @@
     if(isset($_REQUEST['p'])){$paginaactual=$_REQUEST['p'];}
 	$stmt = $dbh->prepare("SELECT * FROM productos WHERE `fechaalta` > timestampadd(day, -45, now()) ".$filtro);
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		$totalitems=$stmt->rowCount();
 		if($totalitems<6)
 		{
@@ -28,25 +28,50 @@
 		}
 		$totalitems=$stmt->rowCount();
 		$totalpaginas=ceil($totalitems/$productosporpagina);
-	
-	
-	?> 
+
+
+	?>
 <div class="container" style="    padding-top: 10px; width:100%;margin-left:0px;margin-right:0px;">
 	 <div class="col-md-12" style="padding: 0px;">
 	<div class="row">
-	
+
 	<!------------------------>
 	<div class="hidden-xs col-md-3">
-	 <div id="wrapperMenu">	            
+    <?php
+      if( isset($_SESSION['uid']) ){
+    echo ' <div class="well" style="padding: 8px 0;">
+          <div style=" overflow-x: hidden;">
+              <ul class="nav nav-list">';
+
+              $stmt = $dbh->prepare("select * from clientes where idcliente=".$_SESSION['clienteid']);
+                  $stmt->execute();
+              $result = $stmt->fetchAll();
+              foreach($result as $row)
+              {
+echo '  <li><label class="tree-toggler nav-header"><i class="fa fa-user"></i> '.$row["razonsocial"].'</label>
+<ul class="nav nav-list tree">
+ <li><i class="fa fa-phone"></i> '.$row["telefono"].'</li>
+ <li><i class="fa fa-map-marker"></i> '.$row["direccion"].' '.$row["localidad"].' '.$row["provincia"].'</li>
+</ul>';
+              }
+
+
+echo '</li>
+  </ul>
+  </div>
+  </div>';
+}
+?>
+	 <div id="wrapperMenu">
 	       <div class="panel-group" id="menu-dashboard">
   <div class="panel panel-default">
   <?php
 				  //traer categorias del mismo nivel que esta
-				  
-		
+
+
 		$stmt = $dbh->prepare("select * from categorias where padre=0");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
 		echo '<div class="panel-heading">
@@ -56,16 +81,16 @@
                         '.$row['nombre'].'<span class="caret"></span></a>
       </h4>
     </div>
-	<div id="collapse'.$row['id'].'" class="panel-collapse collapse"> <ul class="list-group">                  
+	<div id="collapse'.$row['id'].'" class="panel-collapse collapse"> <ul class="list-group">
                        ';
                              $stmt2 = $dbh->prepare("select * from categorias where padre=".$row['id']);
         $stmt2->execute();
-		$result2 = $stmt2->fetchAll(); 
+		$result2 = $stmt2->fetchAll();
 		foreach($result2 as $row2)
 		{
 			echo ' <li><a href="productlist.php?id='.$row2['id'].'">'.strtoupper($row2['nombre']).'</a></li>';
-		
-		}     
+
+		}
                     echo '</ul>
   </div>';
 		}
@@ -74,18 +99,18 @@
 	 </div>
 	</div>
   </div>
-	
-<!------------------------>
-<div class="col-md-9" style="padding: 0px;">		
 
-	
-	
+<!------------------------>
+<div class="col-md-9" style="padding: 0px;">
+
+
+
 	<?php
-	
-	
+
+
 	$stmt = $dbh->prepare("SELECT * FROM productos WHERE `fechaalta` > timestampadd(day, -45, now())  ".$filtro." limit ".$productosporpagina." OFFSET ".(($paginaactual-1)*$productosporpagina));
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		$totalitems=$stmt->rowCount();
 		if($totalitems<6 && $paginaactual==1)
 		{
@@ -133,7 +158,7 @@
 							echo '<br><small>GANE '.$row["descuento"]."% EXTRA!! Comprando ".$row["cantoferta"]." unidades</small><br>";
 						}
 			  echo '</h3>';
-			 
+
               if($funciones->esOferta($row['id']))
 					{
 						echo '<div class="sticker sticker-offer"></div>';
@@ -145,25 +170,25 @@
 					}
                echo '<a href="#" onclick="addCart('.$row['id'].');" class="btn add2cart">Comprar</a>';
            }
-			  } 
+			  }
 			   if($funciones->esNuevo($row['id']))
 			   {
 				   echo '<div class="sticker sticker-new"></div>';
 			   }
-              
+
            echo ' </div>
         </div>';
 		}
-	
+
 	?>
-	
-	
+
+
 
 <div class="col-md-12 col-xs-12" style="text-align:center">
 	<nav aria-label="Page navigation">
   <ul class="pagination">
-    
-   
+
+
     <?php
 	//boton ATRAS
 	if($paginaactual>1)
@@ -186,7 +211,7 @@
 			echo ' <li><a href="novedades.php?p='.($i+1).'&id='.$fMarca.'">'.($i+1).'</a></li>';
 		}
 	}
-	
+
 	//boton SIGUIENTE
 	if($paginaactual<$totalpaginas)
 	{
@@ -197,15 +222,15 @@
     </li>';
 	}
 	?>
-	
-   
+
+
   </ul>
 </nav>
 </div>
-	
+
 	</div>
 </div>
-	
+
 	</div>
 </div>
 
@@ -213,9 +238,8 @@
 		</div>
 	</div>
 	</div>
-    
-    
+
+
       <?php
   include 'footer.php';
   ?>
-  

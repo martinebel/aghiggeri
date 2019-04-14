@@ -11,7 +11,33 @@
     <div class="row">
 	<!------------------------>
 	<div class="hidden-xs col-md-3">
+    <?php
+    	if( isset($_SESSION['uid']) ){
+    echo ' <div class="well" style="padding: 8px 0;">
+          <div style=" overflow-x: hidden;">
+              <ul class="nav nav-list">';
+
+              $stmt = $dbh->prepare("select * from clientes where idcliente=".$_SESSION['clienteid']);
+                  $stmt->execute();
+          		$result = $stmt->fetchAll();
+          		foreach($result as $row)
+          		{
+echo '  <li><label class="tree-toggler nav-header"><i class="fa fa-user"></i> '.$row["razonsocial"].'</label>
+<ul class="nav nav-list tree">
+ <li><i class="fa fa-phone"></i> '.$row["telefono"].'</li>
+ <li><i class="fa fa-map-marker"></i> '.$row["direccion"].' '.$row["localidad"].' '.$row["provincia"].'</li>
+</ul>';
+              }
+
+
+echo '</li>
+  </ul>
+  </div>
+  </div>';
+}
+?>
 	 <div id="wrapperMenu">
+
 	       <div class="panel-group" id="menu-dashboard">
   <div class="panel panel-default">
   <?php
@@ -44,6 +70,7 @@
 		}
 		else
 		{
+
 		$stmt = $dbh->prepare("select * from categorias where padre=0");
         $stmt->execute();
 		$result = $stmt->fetchAll();
@@ -106,7 +133,7 @@
 		$result2 = $stmt2->fetchAll();
 		foreach($result2 as $row)
 		{
-		echo '<legend>Pedido Actual: '.$row["razonsocial"].'</legend>
+		echo '
 		<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>

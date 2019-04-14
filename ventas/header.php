@@ -343,7 +343,7 @@ else
     }
 
   }
-    echo ' <li><a href="novedades.php">Descargas</a></li>';
+    echo ' <li><a href="descargas.php">Descargas</a></li>';
             ?>
 
 
