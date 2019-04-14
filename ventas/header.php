@@ -1,4 +1,4 @@
-<?php require '../db.php';       
+<?php require '../db.php';
 
 echo '<p style="display:none">'.date('Y-m-d_H:i:s').'</p>';
 session_start();
@@ -7,7 +7,7 @@ session_start();
 
 include_once 'functions.php';
 $funciones = new Funciones();
-	   
+
  function generateSession()
  {
 	  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -18,17 +18,17 @@ $funciones = new Funciones();
     }
     return $randomString;
  }
- 
+
 
  /*echo "uid:". $_SESSION['uid']."\n";
 echo "id:" .session_id();*/
- 
+
      if(isset($_POST['action']))
   {
 	  if($_POST['action']=="refreshCart"){
       $stmt=$dbh->prepare("select * from temp_pedidos_header_vendedor where clave='".$_SESSION['uid']."'");
    $stmt->execute();
-   $result2 = $stmt->fetchAll(); 
+   $result2 = $stmt->fetchAll();
     foreach($result2 as $row2)
     {
       $idpedido=$row2["idpedido"];
@@ -41,7 +41,7 @@ echo "id:" .session_id();*/
 	{
 		array_push($codigoarray,$aux);
 	}
-	
+
 	//prodescripcion
 	$cant=$_POST['cant'];
 	$cantarray=array();
@@ -49,7 +49,7 @@ echo "id:" .session_id();*/
 	{
 		array_push($cantarray,$aux);
 	}
-	
+
 	$i=0;
 	foreach($codigoarray as $key)
 {
@@ -73,10 +73,10 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
 
  $stmt=$dbh->prepare("select * from clientes where idcliente='".$_POST['idcliente']."'");
    $stmt->execute();
-   $result2 = $stmt->fetchAll(); 
+   $result2 = $stmt->fetchAll();
     foreach($result2 as $row)
     {
-     
+
     //$_SESSION['uid']=$row["clave"];
       $_SESSION['clienteid']=$row["idcliente"];
       $_SESSION['idpedido']=$idpedido;
@@ -142,15 +142,15 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
       <?php
      /* if( isset($_SESSION['uid']) ){
       echo '<ul class="topBarNav pull-right">
-       
+
         <li class="dropdown">';
-	
+
 		//contar items del carrito
 		$stmt = $dbh->prepare("select productos.*,temp_pedidos.itemno,temp_pedidos.cant from temp_pedidos_header inner join temp_pedidos on temp_pedidos.id=temp_pedidos_header.idpedido inner join productos on productos.id=temp_pedidos.idproducto where temp_pedidos_header.clave='".$_SESSION['uid']."'");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		$totalitems=$stmt->rowCount();
-		
+
           echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-shopping-basket mr-5"></i> <span class="hidden-xs">
                                 Carrito<sup id="totalitems" class="text-primary">(<?php echo $totalitems;?>)</sup>
                                 <i class="fa fa-angle-down ml-5"></i>
@@ -159,7 +159,7 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
             <li>
               <div class="cart-items">
                 <ol class="items">';
-                 
+
 				 //traer detalle del carrito
 				 if($totalitems==0){echo '<li> <div class="product-details"><p class="product-name">No hay productos!</p></div></li>';}
 		foreach($result as $row)
@@ -188,18 +188,18 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
       else
       {
         echo '<img src="default.jpeg"  class="img-responsive" />';
-      } 
+      }
 
                      echo '</a>
                     <div class="product-details">
                       <div class="close-icon"> <a href="#" onclick="removeCart('.$row['itemno'].');"><i class="fa fa-close"></i></a> </div>
                       <p class="product-name"> <a href="detalle.php?id='.$row['id'].'">'.$row['cant'].' x '.$row['nombre'].'</a> </p>  <span class="price text-primary">$'.number_format($funciones->getPrecioCant($row['id'],$_SESSION['tipousuario'],$row['cant'])*$row['cant'],2).'</span> </div>
-                   
+
                   </li>';
 		}
-				
-                  
-                  
+
+
+
       echo '</ol>
               </div>
             </li>
@@ -213,9 +213,9 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
     ?>
     </div>
   </nav><!--=========-TOP_BAR============-->
-    
+
  <!--=========MIDDEL-TOP_BAR============-->
-    
+
     <div class="middleBar">
     <div class="container">
   <div class="row display-table">
@@ -246,13 +246,13 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
       </form>
     </div>
     <!-- end col -->
-   
+
   </div>
   <!-- end  row -->
 </div>
 </div>
-    
-    
+
+
 <nav class="navbar navbar-main navbar-default" role="navigation" style="opacity: 1;">
           <div class="container">
             <!-- Brand and toggle -->
@@ -262,15 +262,15 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>             
+              </button>
             </div>
-        
+
             <!-- Collect the nav links,  -->
-            <div class="collapse navbar-collapse navbar-1" style="margin-top: 0px;">            
+            <div class="collapse navbar-collapse navbar-1" style="margin-top: 0px;">
               <ul class="nav navbar-nav">
-               
-				
-                  
+
+
+
     <?php
     if( !isset($_SESSION['uid']) ){
      echo '
@@ -285,7 +285,7 @@ $stmt=$dbh->prepare("update temp_pedidos_header_vendedor set total='".$funciones
     $stmt = $dbh->prepare("SELECT marca  FROM productos WHERE `fechaalta` > timestampadd(day, -45, now()) group by marca");
         $stmt->execute();
     $result = $stmt->fetchAll();
-    $totalitems=$stmt->rowCount(); 
+    $totalitems=$stmt->rowCount();
     if($totalitems<6)
     {
       echo ' <li><a href="novedades.php">Novedades</a></li>';
@@ -299,13 +299,13 @@ else
                     <li class="col-sm-3 col-xs-12">
                       <ul class="list-unstyled">
                         ';
-     
+
     foreach($result as $row)
-    
+
     {
       echo ' <li><a href="novedades.php?id='.$row['marca'].'">'.$row['marca'].'</a></li>';
     }
-    
+
             echo '<li><a href="novedades.php?id=%">TODAS</a></li>
              </ul>
                     </li></ul>
@@ -316,7 +316,7 @@ else
     $stmt = $dbh->prepare("SELECT productos.marca FROM ofertas inner join productos on productos.codigo=ofertas.idproducto where (fechadesde<='".date('Y-m-d')."' and fechahasta>='".date('Y-m-d')."') group by marca");
         $stmt->execute();
     $result = $stmt->fetchAll();
-    $totalitems=$stmt->rowCount(); 
+    $totalitems=$stmt->rowCount();
     if($totalitems<1)
     {
       echo ' <li><a href="ofertas.php">Ofertas</a></li>';
@@ -330,22 +330,24 @@ else
                     <li class="col-sm-3 col-xs-12">
                       <ul class="list-unstyled">
                         ';
-     
+
     foreach($result as $row)
-    
+
     {
       echo ' <li><a href="ofertas.php?id='.$row['marca'].'">'.$row['marca'].'</a></li>';
     }
-    
+
             echo '<li><a href="ofertas.php?id=%">TODAS</a></li> </ul>
                     </li></ul>
           </li> ';
     }
+
   }
+    echo ' <li><a href="novedades.php">Descargas</a></li>';
             ?>
-            
-		
-		 
+
+
+
       <?php
       if( isset($_SESSION['cid']) )
      {
@@ -358,40 +360,39 @@ echo '<li><a href="logout.php">Cerrar Sesion</a></li>';
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">Categorias <i class="fa fa-angle-down ml-5"></i></a>
                   <ul class="dropdown-menu row">
 
-                   
-                   
+
+
                     <?php
 		 $stmt = $dbh->prepare("select * from categorias where padre=0");
         $stmt->execute();
-		$result = $stmt->fetchAll(); 
+		$result = $stmt->fetchAll();
 		foreach($result as $row)
 		{
 			echo '  <li class="col-sm-3 col-xs-12">
                       <ul class="list-unstyled">
                         <li>'.$row['nombre'].'</li>';
-							
+
 							 $stmt = $dbh->prepare("select * from categorias where padre=".$row['id']);
         $stmt->execute();
-		$result2 = $stmt->fetchAll(); 
+		$result2 = $stmt->fetchAll();
 		foreach($result2 as $row2)
 		{
 			echo ' <li><a href="category.php?id='.$row2['id'].'">'.$row2['nombre'].'</a></li>';
 		}
-		
+
 						echo ' </ul>
                     </li>';
 		}
 					  ?>
-					
-                   
+
+
                   </ul>
                 </li>
-				
-				  
-                  
-                
+
+
+
+
               </ul>
             </div><!-- /.navbar-collapse -->
           </div>
         </nav>
-		 
